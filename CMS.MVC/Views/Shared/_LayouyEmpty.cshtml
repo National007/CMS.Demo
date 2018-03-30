@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="/images/favicon.ico">
+    @Styles.Render("~/mvc/basecss")
+    @Scripts.Render("~/bundles/basejs")
+    @Scripts.Render("~/bundles/layuijs")
+    @RenderSection("Styles", required: false)
+</head>
+<body class="childrenBody">
+    @RenderBody()
+</body>
+
+@RenderSection("Foot", required: false)
+</html>

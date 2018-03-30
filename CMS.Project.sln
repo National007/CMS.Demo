@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "用户UI", "用户UI", "{3A07A5DC-23C4-4781-BE8D-7ECA3EC9CE06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "应用层", "应用层", "{A1B98A4D-E6A2-4164-9A49-F74C488613BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "功能适配层", "功能适配层", "{EA79DBF2-FE35-4D92-94AB-DED43FCE6CE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{B7DCFBFB-9A44-4E6D-8F45-2614057A6D39}"
+	ProjectSection(SolutionItems) = preProject
+		readme.txt = readme.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS.MVC", "CMS.MVC\CMS.MVC.csproj", "{1DB85DE7-9DFA-458B-ACA9-8482CB6DA214}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{EEF273D1-C815-454E-8469-9DCC79DFCBFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityModels", "EntityModels\EntityModels.csproj", "{D163C41E-CF1C-4BBC-A33B-7A16057838C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DB85DE7-9DFA-458B-ACA9-8482CB6DA214}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DB85DE7-9DFA-458B-ACA9-8482CB6DA214}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DB85DE7-9DFA-458B-ACA9-8482CB6DA214}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DB85DE7-9DFA-458B-ACA9-8482CB6DA214}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEF273D1-C815-454E-8469-9DCC79DFCBFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEF273D1-C815-454E-8469-9DCC79DFCBFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEF273D1-C815-454E-8469-9DCC79DFCBFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEF273D1-C815-454E-8469-9DCC79DFCBFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D163C41E-CF1C-4BBC-A33B-7A16057838C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D163C41E-CF1C-4BBC-A33B-7A16057838C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D163C41E-CF1C-4BBC-A33B-7A16057838C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D163C41E-CF1C-4BBC-A33B-7A16057838C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1DB85DE7-9DFA-458B-ACA9-8482CB6DA214} = {3A07A5DC-23C4-4781-BE8D-7ECA3EC9CE06}
+		{EEF273D1-C815-454E-8469-9DCC79DFCBFB} = {EA79DBF2-FE35-4D92-94AB-DED43FCE6CE5}
+		{D163C41E-CF1C-4BBC-A33B-7A16057838C7} = {A1B98A4D-E6A2-4164-9A49-F74C488613BD}
+	EndGlobalSection
+EndGlobal
