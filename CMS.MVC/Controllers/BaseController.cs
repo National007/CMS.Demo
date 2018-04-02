@@ -13,16 +13,6 @@ namespace CMS.MVC.Controllers
 {
     public class BaseController : Controller
     {
-        /// <summary>
-        /// Ioc 解析
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public T Resolve<T>()
-        {
-            return Serviece.CMSContext.Instance.ServiceResolve<T>();
-        }
-
         #region private
         private HtmlTextWriter tw;
 

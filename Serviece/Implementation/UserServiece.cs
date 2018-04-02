@@ -9,26 +9,23 @@ using EntityModels;
 
 namespace Serviece.Implementation
 {
-   public class UserServiece:BaseRepository<UserModels>,IUserServiece
+   public class UserServiece:IUserServiece
     {
+        private OpenAuthDBEntities context = new OpenAuthDBEntities();
+        //public List<UserModels> GetList()
+        //{
+        //    var list = context.User.Select(s =>
+        //    new UserModels()
+        //    {
+        //        Account = s.Account,
+        //        Name=s.Name
+        //    }).ToList();
 
-        public IEnumerable<UserModels> GetList()
+        //    return list;
+        //}
+        public List<User> GetList()
         {
-            var list = new List<UserModels>();
-            //var list = this.Find().ToList();
-            using (var ent=new OpenAuthDBEntities())
-            {
-                list = ent.User.ToList().Select(s=>
-                {
-                    var m = new UserModels();
-                    m.Account = s.Account;
-                    m.Password = s.Password;
-                    m.Name = s.Name;
-                    return m;
-                }).ToList();
-            }
-
-            return list;
+            return context.User.ToList();
         }
     }
 }

@@ -14,8 +14,7 @@ namespace CMS.MVC
     {
         protected void Application_Start()
         {
-            // AutofacExt.InitAutofac();
-            new AutofacExt().Init();
+            IocConfig.RegisterDependencies();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

@@ -4,12 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Mvc; 
 
 namespace CMS.MVC.Controllers
 {
     public class HomeController : BaseController
     {
+        private IUserServiece _serviece;
+        public HomeController(IUserServiece serviece) {
+            this._serviece = serviece;
+        }
+
+
+
         public ActionResult Index()
         {
             return View();
@@ -27,7 +34,7 @@ namespace CMS.MVC.Controllers
 
         public JsonResult GetList()
         {
-            var list = Resolve<IUserServiece>().GetList();
+            var list = _serviece.GetList();
             var layuiGrid = new LayuiGrid();
             layuiGrid.count = list.Count();
             layuiGrid.data = list;

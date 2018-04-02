@@ -99,8 +99,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutofacExt.cs" />
-    <Compile Include="CMSContext.cs" />
     <Compile Include="Implementation\BaseRepository.cs" />
     <Compile Include="Implementation\UnitWork.cs" />
     <Compile Include="Implementation\UserServiece.cs" />
