@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -334,6 +335,14 @@
     <ProjectReference Include="..\Application\Application.csproj">
       <Project>{eef273d1-c815-454e-8469-9dcc79dfcbfb}</Project>
       <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Serviece\Serviece.csproj">
+      <Project>{3ef51322-5784-4452-be0e-75492b10b5c9}</Project>
+      <Name>Serviece</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebModels\WebModels.csproj">
+      <Project>{9b586ecb-9b87-44ef-989d-f131d2f2d1db}</Project>
+      <Name>WebModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

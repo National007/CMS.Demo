@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serviece;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,10 +10,13 @@ using System.Web.Routing;
 
 namespace CMS.MVC
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
+            // AutofacExt.InitAutofac();
+            new AutofacExt().Init();
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
