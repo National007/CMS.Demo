@@ -1,9 +1,46 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = "文章列表";
     var woman = 0;
 
 }
-<form class="layui-form">
+<style>
+    a {
+        text-decoration: none;
+    }
+
+        a[class="button-selectimg"], input[type='submit'] {
+            color: #00A2D4;
+            padding: 4px 6px;
+            border: 1px dashed #00A2D4;
+            border-radius: 2px;
+        }
+
+    .input-file {
+        margin: 200px 300px;
+    }
+
+    input[id="avatval"] {
+        padding: 3px 6px;
+        padding-left: 10px;
+        border: 1px solid #E7EAEC;
+        width: 230px;
+        height: 25px;
+        line-height: 25px;
+        border-left: 3px solid #3FB7EB;
+        background: #FAFAFB;
+        border-radius: 2px;
+    }
+
+    input[type='file'] {
+        border: 0px;
+        display: none;
+    }
+</style>
+<link href="~/Scripts/jquery-easyui-1.4.3/themes/default/easyui.css" rel="stylesheet" />
+<link href="~/Scripts/jquery-easyui-1.4.3/themes/icon.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+
     <blockquote class="layui-elem-quote quoteBox">
         <form class="layui-form">
             <div class="layui-inline">
@@ -17,6 +54,16 @@
             </div>
             <div class="layui-inline">
                 <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn">批量删除</a>
+            </div>
+            
+        </form>
+        <form id="fileForm" name="fileForm" action="" method="post" enctype="multipart/form-data">
+            <input type="text" id="avatval" placeholder="请选择文件···" readonly="readonly" style="vertical-align: middle;" />
+            <input type="file" name="avatar" id="avatar" />
+            <a href="javascript:void(0);" class="button-selectimg" id="avatsel">选择文件</a>
+
+            <div class="layui-inline">
+                <a class="layui-btn" id="upload">导入数据</a>
             </div>
         </form>
     </blockquote>
@@ -36,7 +83,6 @@
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
         <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="look">预览</a>
     </script>
-</form>
 @section Foot{
     <script>
         layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
@@ -90,10 +136,10 @@
                     { type: "checkbox", fixed: "left", width: 50 },
                     { field: 'Account', title: '账号', width: 100, align: "center" },
                     { field: 'Password', title: '密码', width: 100 },
-                    { field: 'Name', title: '姓名',width:100, align: 'center' },
-                    { field: 'Sex', title: '性别',width:60, align: 'center', templet: "#sexTpl" },
+                    { field: 'Name', title: '姓名', width: 100, align: 'center' },
+                    { field: 'Sex', title: '性别', width: 60, align: 'center', templet: "#sexTpl" },
                     { field: 'Status', title: '状态', align: 'center' },
-                    
+
                 ]]
             });
 
@@ -204,6 +250,60 @@
                 }
             });
 
+            $("#avatsel").click(function () {
+                $("input[type='file']").trigger('click');
+            });
+            $("#avatval").click(function () {
+                $("input[type='file']").trigger('click');
+            });
+            $("input[type='file']").change(function () {
+                $("#avatval").val($(this).val());
+            });
+
+            $("#upload").click(function () {
+                //console.log($("#avatval").val());
+                //console.log($("#fileForm").serialize());
+
+                var file = $('#avatval').val();
+                if (file != "") {
+                    var stuff = file.substring(file.lastIndexOf('.'), file.length);
+                    if (stuff != '.xls' && stuff != '.xlsx') {
+                        layer.alert("文件类型不正确，请选择Excel文件！");
+                        return;
+                    }
+                } else {
+                    layer.alert("请上传数据文件！");
+                    return;
+                }
+
+                var options = {
+                    url: "ImportExecl",
+                    type: "POST",
+                    async: false,
+                    data: $("#fileForm").serialize(),
+                    beforeSend: function () {
+                        msgIndex = layer.msg('正在导入数据…', { icon: 16, time: false });
+                    },
+                    success: function (dd) {
+                        if (!dd.Success) {
+                            layer.alert("很遗憾,提交失败。 <br /> " + dd.Message, function () {
+                                document.getElementById("files").value = "";
+                            });
+                            return;
+                        } else {
+                            layer.alert("导入成功", function (index) {
+                                layer.msg('我关闭了', {icon:16});
+                                layer.close(index);
+                            });
+                        }
+                    }
+                };
+                console.log($("#fileForm").serialize());
+                $("#fileForm").ajaxSubmit(options);
+                return;
+
+            });
+
         })
     </script>
-    }
+}

@@ -12,10 +12,7 @@ namespace Serviece.Implementation
     {
         public List<User> GetList()
         {
-            using (OpenAuthDBEntities ent =new OpenAuthDBEntities())
-            {
-                return ent.Set<User>().ToList();
-            }
+            return GetAll().ToList();
         }
     }
 }

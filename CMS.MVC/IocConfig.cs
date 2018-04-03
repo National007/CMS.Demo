@@ -11,6 +11,8 @@ using System.Reflection;
 using System.Web.Http;
 using Autofac.Integration.WebApi;
 using EntityModels;
+using HH.Tools.ExcelFactory;
+using HH.Tools.FileFactory;
 
 namespace CMS.MVC
 {
@@ -25,9 +27,11 @@ namespace CMS.MVC
             //倘若需要默认注册所有的，请这样写（主要参数需要修改）
             //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
             //   .AsImplementedInterfaces();
+            builder.RegisterType<ExcelServices>().As<IExcelServices>().InstancePerLifetimeScope();
+            builder.RegisterType<FileServices>().As<IFileServices>().InstancePerLifetimeScope();
 
-            //Admin
-            builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerHttpRequest();
+
+            RegisterRepository(builder);
 
 
             #endregion
@@ -35,6 +39,11 @@ namespace CMS.MVC
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
+        }
+
+        private static void RegisterRepository(ContainerBuilder builder)
+        {
+            builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerHttpRequest();
         }
     }
 }

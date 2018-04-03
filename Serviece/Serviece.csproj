@@ -100,7 +100,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities.cs" />
     <Compile Include="Implementation\BaseRepository.cs" />
     <Compile Include="Implementation\UserRepository.cs" />
     <Compile Include="Interface\IBaseRepository.cs" />

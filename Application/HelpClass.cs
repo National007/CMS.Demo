@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Application.HelpClass
+namespace Application
 {
     public static  class HelpClass
     {

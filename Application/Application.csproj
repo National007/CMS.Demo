@@ -65,12 +65,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExcelHelper\ExcelResultModel.cs" />
-    <Compile Include="ExcelHelper\ExcelService.cs" />
-    <Compile Include="ExcelHelper\IExcelService.cs" />
+    <Compile Include="DataHelper.cs" />
     <Compile Include="HelpClass.cs" />
-    <Compile Include="PictureServices\IPictureService.cs" />
-    <Compile Include="PictureServices\PictureService.cs" />
+    <Compile Include="Offices\Excel\ExcelConfig.cs" />
+    <Compile Include="Offices\Excel\ExcelHelper.cs" />
+    <Compile Include="Offices\Excel\Model\ColumnEntity.cs" />
+    <Compile Include="Offices\Excel\Model\ExcelStyle.cs" />
+    <Compile Include="Offices\Excel\Model\TemplateMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidateCode.cs" />
   </ItemGroup>
