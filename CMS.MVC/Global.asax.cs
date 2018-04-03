@@ -1,4 +1,5 @@
-﻿using Serviece;
+﻿using CMS.MVC.AutoMapper;
+using Serviece;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,17 @@ namespace CMS.MVC
     {
         protected void Application_Start()
         {
-            IocConfig.RegisterDependencies();
-
+            
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            IocConfig.RegisterAutofac();
+
+
+            RegisterAutomapper.Excute();
         }
     }
 }

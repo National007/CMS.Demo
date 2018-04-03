@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D163C41E-CF1C-4BBC-A33B-7A16057838C7}</ProjectGuid>
+    <ProjectGuid>{0BD9B2E0-2C67-4C43-AC0A-5FF740CD724D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EntityModels</RootNamespace>
     <AssemblyName>EntityModels</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,11 +33,9 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -51,109 +50,132 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application.cs">
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryType.cs">
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="DicDetail.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="DicIndex.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FlowInstance.cs">
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FlowInstanceOperationHistory.cs">
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FlowInstanceTransitionHistory.cs">
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FlowScheme.cs">
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Form.cs">
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Form_QINGJIA.cs">
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Module.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="ModuleElement.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="OpenAuthModel.Context.cs">
+    <Compile Include="Name.cs">
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OpenAuthModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OpenAuthModel.Context.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="OpenAuthModel.cs">
+    <Compile Include="OpenAuthModels.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="OpenAuthModel.Designer.cs">
+    <Compile Include="OpenAuthModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OpenAuthModel.edmx</DependentUpon>
+      <DependentUpon>OpenAuthModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="Org.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Relevance.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Resource.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Role.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Stock.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Test.cs">
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="WF_FrmMain.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="WF_ProcessInstance.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="WF_ProcessOperationHistory.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="WF_ProcessScheme.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="WF_ProcessTransitionHistory.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="WF_SchemeContent.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
     <Compile Include="WF_SchemeInfo.cs">
-      <DependentUpon>OpenAuthModel.tt</DependentUpon>
+      <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="OpenAuthModel.edmx">
+    <EntityDeploy Include="OpenAuthModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OpenAuthModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>OpenAuthModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="OpenAuthModel.edmx.diagram">
-      <DependentUpon>OpenAuthModel.edmx</DependentUpon>
+    <None Include="OpenAuthModels.edmx.diagram">
+      <DependentUpon>OpenAuthModels.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="OpenAuthModel.Context.tt">
+    <Content Include="OpenAuthModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OpenAuthModel.edmx</DependentUpon>
-      <LastGenOutput>OpenAuthModel.Context.cs</LastGenOutput>
+      <LastGenOutput>OpenAuthModels.Context.cs</LastGenOutput>
+      <DependentUpon>OpenAuthModels.edmx</DependentUpon>
     </Content>
-    <Content Include="OpenAuthModel.tt">
+    <Content Include="OpenAuthModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OpenAuthModel.edmx</DependentUpon>
-      <LastGenOutput>OpenAuthModel.cs</LastGenOutput>
+      <DependentUpon>OpenAuthModels.edmx</DependentUpon>
+      <LastGenOutput>OpenAuthModels.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

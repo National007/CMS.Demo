@@ -1,14 +1,11 @@
 ﻿using EntityModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebModels;
+using System.Linq.Expressions;
 
 namespace Serviece.Interface
 {
-   public interface IUserServiece
+    public interface IUserRepository:IBaseRepository<User>
     {
         List<User> GetList();
     }

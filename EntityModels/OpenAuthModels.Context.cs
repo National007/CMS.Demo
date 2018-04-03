@@ -25,16 +25,26 @@ namespace EntityModels
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Application> Application { get; set; }
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<CategoryType> CategoryType { get; set; }
         public virtual DbSet<DicDetail> DicDetail { get; set; }
         public virtual DbSet<DicIndex> DicIndex { get; set; }
+        public virtual DbSet<FlowInstance> FlowInstance { get; set; }
+        public virtual DbSet<FlowInstanceOperationHistory> FlowInstanceOperationHistory { get; set; }
+        public virtual DbSet<FlowInstanceTransitionHistory> FlowInstanceTransitionHistory { get; set; }
+        public virtual DbSet<FlowScheme> FlowScheme { get; set; }
+        public virtual DbSet<Form> Form { get; set; }
+        public virtual DbSet<Form_QINGJIA> Form_QINGJIA { get; set; }
         public virtual DbSet<Module> Module { get; set; }
         public virtual DbSet<ModuleElement> ModuleElement { get; set; }
+        public virtual DbSet<Name> Name { get; set; }
         public virtual DbSet<Org> Org { get; set; }
         public virtual DbSet<Relevance> Relevance { get; set; }
         public virtual DbSet<Resource> Resource { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Stock> Stock { get; set; }
+        public virtual DbSet<Test> Test { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<WF_FrmMain> WF_FrmMain { get; set; }
         public virtual DbSet<WF_ProcessInstance> WF_ProcessInstance { get; set; }

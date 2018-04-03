@@ -63,6 +63,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -99,12 +100,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities.cs" />
     <Compile Include="Implementation\BaseRepository.cs" />
-    <Compile Include="Implementation\UnitWork.cs" />
-    <Compile Include="Implementation\UserServiece.cs" />
+    <Compile Include="Implementation\UserRepository.cs" />
     <Compile Include="Interface\IBaseRepository.cs" />
-    <Compile Include="Interface\IUnitWork.cs" />
-    <Compile Include="Interface\IUserServiece.cs" />
+    <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,7 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EntityModels\EntityModels.csproj">
-      <Project>{d163c41e-cf1c-4bbc-a33b-7a16057838c7}</Project>
+      <Project>{0bd9b2e0-2c67-4c43-ac0a-5ff740cd724d}</Project>
       <Name>EntityModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebModels\WebModels.csproj">

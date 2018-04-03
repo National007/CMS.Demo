@@ -10,9 +10,9 @@ namespace CMS.MVC.Controllers
 {
     public class HomeController : BaseController
     {
-        private IUserServiece _serviece;
-        public HomeController(IUserServiece serviece) {
-            this._serviece = serviece;
+        private IUserRepository _repository;
+        public HomeController(IUserRepository repository) {
+            this._repository = repository;
         }
 
 
@@ -34,7 +34,7 @@ namespace CMS.MVC.Controllers
 
         public JsonResult GetList()
         {
-            var list = _serviece.GetList();
+            var list = _repository.GetList();
             var layuiGrid = new LayuiGrid();
             layuiGrid.count = list.Count();
             layuiGrid.data = list;

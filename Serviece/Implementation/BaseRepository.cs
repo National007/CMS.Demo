@@ -14,145 +14,128 @@ using WebModels;
 
 namespace Serviece.Implementation
 {
-   public class BaseRepository<T>:IBaseRepository<T> where T : Entity
+   public class BaseRepository<T>:IBaseRepository<T> where T : class,new() //限制T的类型为class或者对象
     {
-        protected OpenAuthDBEntities Context = new OpenAuthDBEntities();
+        #region 查询普通实现方案(基于Lambda表达式的Where查询)
+           /// <summary>
+           /// 获取所有Entity
+          /// </summary>
+         /// <param name="exp">Lambda条件的where</param>
+         /// <returns>返回IEnumerable类型</returns>
+        public virtual IEnumerable<T> GetEntities(Func<T, bool> exp)
+         {
+             using (Entities db = new Entities())
+             {
+                  return db.Set<T>().Where(exp).ToList();
+             }
+  
 
-
+        }
         /// <summary>
-        /// 根据过滤条件，获取记录
+        /// 计算总个数(分页)
         /// </summary>
-        /// <param name="exp">The exp.</param>
-        public IQueryable<T> Find(Expression<Func<T, bool>> exp = null)
-        {
-            return Filter(exp);
-        }
+         /// <param name="exp">Lambda条件的where</param>
+         /// <returns></returns>
+          public virtual int GetEntitiesCount(Func<T, bool> exp)
+          {
+              using (Entities db = new Entities())
+             {
+                  return db.Set<T>().Where(exp).ToList().Count();
+ 
+             }
+         }
+         /// <summary>
+         /// 分页查询(Linq分页方式)
+          /// </summary>
+          /// <param name="pageNumber">当前页</param>
+         /// <param name="pageSize">页码</param>
+         /// <param name="orderName">lambda排序名称</param>
+         /// <param name="sortOrder">排序(升序or降序)</param>
+         /// <param name="exp">lambda查询条件where</param>
+         /// <returns></returns>
+          public virtual IEnumerable<T> GetEntitiesForPaging(int pageNumber, int pageSize, Func<T, string> orderName, string sortOrder, Func<T, bool> exp)
+          {
+             using (Entities db = new Entities())
+             {
+                  if (sortOrder == "asc") //升序排列
+                  {
+                      return db.Set<T>().Where(exp).OrderBy(orderName).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+                  }
+                  else
+                  {
+                      return db.Set<T>().Where(exp).OrderByDescending(orderName).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+                  }
+             }
+ 
+          }
+          /// <summary>
+         /// 根据条件查找满足条件的一个entites
+         /// </summary>
+         /// <param name="exp">lambda查询条件where</param>
+          /// <returns></returns>
+          public virtual T GetEntity(Func<T, bool> exp)
+         {
+              using (Entities db = new Entities())
+              {
+                  return db.Set<T>().Where(exp).SingleOrDefault();
+              }
+          }
+          #endregion
+  
+          #region 增改删实现
+          /// <summary>
+          /// 插入Entity
+         /// </summary>
+          /// <param name="model"></param>
+          /// <returns></returns>
+          public virtual bool Insert(T entity)
+          {
+              using (Entities db = new Entities())
+             {
+                 var obj = db.Set<T>();
+                 obj.Add(entity);
+                 return db.SaveChanges() > 0;
+ 
+             }
 
-        public bool IsExist(Expression<Func<T, bool>> exp)
-        {
-            return Context.Set<T>().Any(exp);
-        }
-
-        /// <summary>
-        /// 查找单个
+          }
+        /// 更新Entity(注意这里使用的傻瓜式更新,可能性能略低)
         /// </summary>
-        public T FindSingle(Expression<Func<T, bool>> exp)
+        /// <param name="model"></param>
+        /// <returns></returns>
+         public virtual bool Update(T entity)
         {
-            return Context.Set<T>().AsNoTracking().FirstOrDefault(exp);
-        }
-
-        /// <summary>
-        /// 得到分页记录
+            using (Entities db = new Entities())
+           {
+                var obj = db.Set<T>();
+                obj.Attach(entity);
+                 db.Entry(entity).State =EntityState.Modified;
+                return db.SaveChanges() > 0;
+             }
+ 
+ 
+         }
+         /// <summary>
+         /// 删除Entity
         /// </summary>
-        /// <param name="pageindex">The pageindex.</param>
-        /// <param name="pagesize">The pagesize.</param>
-        /// <param name="orderby">排序，格式如："Id"/"Id descending"</param>
-        public IQueryable<T> Find(int pageindex, int pagesize, string orderby = "", Expression<Func<T, bool>> exp = null)
+        /// <param name="entity"></param>
+       /// <returns></returns>
+        public virtual bool Delete(T entity)
         {
-            if (pageindex < 1) pageindex = 1;
-            if (string.IsNullOrEmpty(orderby))
-                orderby = "Id descending";
-
-            return Filter(exp).Skip(pagesize * (pageindex - 1)).Take(pagesize);
-        }
-
-        /// <summary>
-        /// 根据过滤条件获取记录数
-        /// </summary>
-        public int GetCount(Expression<Func<T, bool>> exp = null)
-        {
-            return Filter(exp).Count();
-        }
-
-        public void Add(T entity)
-        {
-            if (string.IsNullOrEmpty(entity.Id))
-            {
-                entity.Id = Guid.NewGuid().ToString();
+           using (Entities db = new Entities())
+           {
+                var obj = db.Set<T>();
+                if (entity != null)
+                {
+                    obj.Attach(entity);
+                     db.Entry(entity).State = EntityState.Deleted;
+                     obj.Remove(entity);
+                    return db.SaveChanges() > 0;
+                }
+                return false;
             }
-            Context.Set<T>().Add(entity);
-            Save();
-        }
-
-        /// <summary>
-        /// 批量添加
-        /// </summary>
-        /// <param name="entities">The entities.</param>
-        public void BatchAdd(T[] entities)
-        {
-            foreach (var entity in entities)
-            {
-                entity.Id = Guid.NewGuid().ToString();
-            }
-            Context.Set<T>().AddRange(entities);
-            Save();
-        }
-
-        public void Update(T entity)
-        {
-            var entry = this.Context.Entry(entity);
-            //todo:如果状态没有任何更改，会报错
-            entry.State = EntityState.Modified;
-
-            Save();
-        }
-
-        public void Delete(T entity)
-        {
-            Context.Set<T>().Remove(entity);
-            Save();
-        }
-
-        /// <summary>
-        /// 按指定id更新实体,会更新整个实体
-        /// </summary>
-        /// <param name="identityExp">The identity exp.</param>
-        /// <param name="entity">The entity.</param>
-        public void Update(Expression<Func<T, object>> identityExp, T entity)
-        {
-            Context.Set<T>().AddOrUpdate(identityExp, entity);
-            Save();
-        }
-
-        /// <summary>
-        /// 实现按需要只更新部分更新
-        /// <para>如：Update(u =>u.Id==1,u =>new User{Name="ok"});</para>
-        /// </summary>
-        /// <param name="where">The where.</param>
-        /// <param name="entity">The entity.</param>
-        public void Update(Expression<Func<T, bool>> where, Expression<Func<T, T>> entity)
-        {
-            Context.Set<T>().Where(where).Update(entity);
-        }
-
-        public virtual void Delete(Expression<Func<T, bool>> exp)
-        {
-            Context.Set<T>().Where(exp).Delete();
-        }
-
-        public void Save()
-        {
-            try
-            {
-                Context.SaveChanges();
-            }
-            catch (DbEntityValidationException e)
-            {
-                throw new Exception(e.EntityValidationErrors.First().ValidationErrors.First().ErrorMessage);
-            }
-        }
-
-        private IQueryable<T> Filter(Expression<Func<T, bool>> exp)
-        {
-            var dbSet = Context.Set<T>().AsQueryable();
-            if (exp != null)
-                dbSet = dbSet.Where(exp);
-            return dbSet;
-        }
-
-        public int ExecuteSql(string sql)
-        {
-            return Context.Database.ExecuteSqlCommand(sql);
-        }
+ 
+         }
+        #endregion
     }
 }

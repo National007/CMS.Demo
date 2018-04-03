@@ -1,5 +1,6 @@
 ﻿@{ 
     ViewBag.Title = "文章列表";
+    var woman = 0;
 
 }
 <form class="layui-form">
@@ -21,14 +22,12 @@
     </blockquote>
     <table id="newsList" lay-filter="newsList"></table>
     <!--审核状态-->
-    <script type="text/html" id="newsStatus">
-        {{#  if(d.newsStatus == "1"){ }}
-        <span class="layui-red">等待审核</span>
-        {{#  } else if(d.newsStatus == "0"){ }}
-        <span class="layui-blue">已存草稿</span>
-        {{#  } else { }}
-        审核通过
-        {{#  }}}
+    <script type="text/html" id="sexTpl">
+        {{#  if(d.Sex == "1"){ }}
+        <span class="layui-red">Boy</span>
+        {{#  } else if(d.Sex == '@woman'){ }}
+        <span class="layui-blue">Girl</span>
+        {{#  } }}
     </script>
 
     <!--操作-->
@@ -89,10 +88,10 @@
                 id: "newsListTable",
                 cols: [[
                     { type: "checkbox", fixed: "left", width: 50 },
-                    { field: 'Account', title: '账号', width: 60, align: "center" },
-                    { field: 'Password', title: '密码', width: 350 },
-                    { field: 'Name', title: '姓名', align: 'center' },
-                    { field: 'Sex', title: '性别', align: 'center', templet: "#newsStatus" },
+                    { field: 'Account', title: '账号', width: 100, align: "center" },
+                    { field: 'Password', title: '密码', width: 100 },
+                    { field: 'Name', title: '姓名',width:100, align: 'center' },
+                    { field: 'Sex', title: '性别',width:60, align: 'center', templet: "#sexTpl" },
                     { field: 'Status', title: '状态', align: 'center' },
                     
                 ]]
