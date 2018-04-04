@@ -36,9 +36,6 @@
         display: none;
     }
 </style>
-<link href="~/Scripts/jquery-easyui-1.4.3/themes/default/easyui.css" rel="stylesheet" />
-<link href="~/Scripts/jquery-easyui-1.4.3/themes/icon.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
 <script src="~/Scripts/jquery.form.js"></script>
 
     <blockquote class="layui-elem-quote quoteBox">
@@ -57,7 +54,7 @@
             </div>
             
         </form>
-        <form id="fileForm" name="fileForm" action="" method="post" enctype="multipart/form-data">
+        @*<form id="fileForm" name="fileForm" action="" method="post" enctype="multipart/form-data">
             <input type="text" id="avatval" placeholder="请选择文件···" readonly="readonly" style="vertical-align: middle;" />
             <input type="file" name="avatar" id="avatar" />
             <a href="javascript:void(0);" class="button-selectimg" id="avatsel">选择文件</a>
@@ -65,7 +62,9 @@
             <div class="layui-inline">
                 <a class="layui-btn" id="upload">导入数据</a>
             </div>
-        </form>
+
+            <button type="button" class="layui-btn layui-btn-primary" id="test4"><i class="layui-icon"></i>只允许压缩文件</button>
+        </form>*@
     </blockquote>
     <table id="newsList" lay-filter="newsList"></table>
     <!--审核状态-->
@@ -249,13 +248,15 @@
                     layer.alert("此功能需要前台展示，实际开发中传入对应的必要参数进行文章内容页面访问")
                 }
             });
-
+            //选择文件按钮
             $("#avatsel").click(function () {
                 $("input[type='file']").trigger('click');
             });
+            //文件框
             $("#avatval").click(function () {
                 $("input[type='file']").trigger('click');
             });
+
             $("input[type='file']").change(function () {
                 $("#avatval").val($(this).val());
             });
@@ -298,7 +299,7 @@
                         }
                     }
                 };
-                console.log($("#fileForm").serialize());
+                //console.log($("#fileForm").serialize());
                 $("#fileForm").ajaxSubmit(options);
                 return;
 

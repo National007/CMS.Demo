@@ -43,7 +43,8 @@ namespace CMS.MVC
 
         private static void RegisterRepository(ContainerBuilder builder)
         {
-            builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerHttpRequest();
+            //builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerHttpRequest();
+            builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerLifetimeScope();
         }
     }
 }

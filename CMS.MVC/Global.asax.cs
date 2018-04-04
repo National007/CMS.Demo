@@ -26,6 +26,8 @@ namespace CMS.MVC
 
 
             RegisterAutomapper.Excute();
+
+            HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
         }
     }
 }

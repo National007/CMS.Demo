@@ -12,8 +12,6 @@ using WebModels;
 using System.Data;
 using Application;
 using Application.Offices.Excel.Model;
-using Application.Offices.Excel;
-using System.Text;
 using KS.Util.Offices;
 using System.IO;
 using System.Collections;
@@ -55,7 +53,11 @@ namespace CMS.MVC.Controllers
 
         public JsonResult GetList()
         {
-            var list = _repository.GetList();
+            //var list = _repository.GetList();
+            var list = _repository.GetListAll();
+
+            var str = _repository.GetType("嘿嘿");
+
             var layuiGrid = new LayuiGrid();
             layuiGrid.count = list.Count();
             layuiGrid.data = list;
@@ -101,19 +103,19 @@ namespace CMS.MVC.Controllers
                 dt = DataHelper.ListToDataTable(list.ToList());
 
                 //需要导出的列
-                int arrLen = 6;
+                int arrLen = 5;
                 List<TemplateMode> tempList = new List<TemplateMode>();
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    for (int j = 1; j < arrLen; j++)
+                    for (int j = 0; j < arrLen; j++)
                     {
                         //if(j>=arrLen-3)
-                        string value = dt.Rows[i][j + 3].ToString();
+                        string value = dt.Rows[i][j+2].ToString();
                         var enty = new TemplateMode
                         {
                             row = i + 2,
-                            cell = j - 1,
+                            cell = j,
                             value = value
                         };
                         tempList.Add(enty);

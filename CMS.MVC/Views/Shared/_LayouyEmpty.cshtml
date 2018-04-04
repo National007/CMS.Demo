@@ -4,7 +4,6 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link rel="icon" href="/images/favicon.ico">
     @Styles.Render("~/mvc/basecss")
     @Scripts.Render("~/bundles/basejs")
     @Scripts.Render("~/bundles/layuijs")
@@ -13,6 +12,17 @@
 <body class="childrenBody">
     @RenderBody()
 </body>
+@*<script>
+    $(function () {
+        console.log("一张网页，要经历怎样的过程，才能抵达用户面前？\n"+
+"一位新人，要经历怎样的成长，才能站在技术之巅？\n"+
+"            探寻这里的秘密；\n"+
+"            体验这里的挑战；\n"+
+"            成为这里的主人；\n"+
+            "            加入百度，加入网页搜索，你，可以影响世界。");
 
+        console.log("玩玩的\n\t别当真");
+    });
+</script>*@
 @RenderSection("Foot", required: false)
 </html>

@@ -8,5 +8,9 @@ namespace Serviece.Interface
     public interface IUserRepository:IBaseRepository<User>
     {
         List<User> GetList();
+
+        List<User> GetListAll();
+
+        string GetType(string Type);
     }
 }
