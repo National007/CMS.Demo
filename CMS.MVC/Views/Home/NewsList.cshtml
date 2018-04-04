@@ -84,6 +84,8 @@
     </script>
 @section Foot{
     <script>
+        var rightDataList = [];
+        var leftDataList = [];
         layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
             var form = layui.form,
                 layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -133,13 +135,71 @@
                 id: "newsListTable",
                 cols: [[
                     { type: "checkbox", fixed: "left", width: 50 },
-                    { field: 'Account', title: '账号', width: 100, align: "center" },
-                    { field: 'Password', title: '密码', width: 100 },
-                    { field: 'Name', title: '姓名', width: 100, align: 'center' },
+                    { field: 'Account', title: '账号', width: 100, align: "center", event:"clickValue" },
+                    { field: 'Password', title: '密码', width: 100, event: "clickValue" },
+                    { field: 'Name', title: '姓名', width: 100, align: 'center', event: "clickValue" },
                     { field: 'Sex', title: '性别', width: 60, align: 'center', templet: "#sexTpl" },
-                    { field: 'Status', title: '状态', align: 'center' },
+                    { field: 'Status', title: '状态', align: 'center', event: "clickValue" },
 
                 ]]
+            });
+            var datalist = [];
+            //点击行选中复选框事件
+            table.on('tool(newsList)', function (obj) {
+                //除了操作按钮
+                if (obj.event != "clickValue") {
+                    return false
+                }
+                var currindex = null;
+                var data = obj.data;
+                var id = data.Id;
+                //获取选中行数据
+                if (datalist.length > 0) {
+                    $.each(datalist, function (index, row) {
+                        if (row.Id && row.Id == id) {
+                            currindex = index;
+                            return;
+                        }
+                    })
+                }
+                if (currindex != null) {
+                    //选中
+                    var tableBox = $(this).parents(".layui-table-box");
+                    var tableDiv;
+                    if (tableBox.find('.layui-table-fixed.layui-table-fixed-l').length > 0) {
+                        tableDiv = tableBox.find('.layui-table-fixed.layui-table-fixed-l');
+                    } else {
+                        tableDiv = tableBox.find('.layui-table-body.layui-table-main');
+                    }
+                    var checkCell = tableDiv.find('tr[data-index=' + currindex + ']').find("td div.laytable-cell-checkbox div.layui-form-checkbox I");
+                    if (checkCell.length > 0) {
+                        checkCell.click();
+                    }
+                }
+            });
+
+            //点击行选中单选按钮事件
+            table.on('tool(leftDemo)', function (obj) {
+                //除了操作按钮
+                if (obj.event != "clickValue") {
+                    return false
+                }
+                var currindex = null;
+                var data = obj.data;
+                var id = data.PlatformPIXId;
+                //获取选中行数据
+                if (leftDataList.length > 0) {
+                    $.each(leftDataList, function (index, row) {
+                        if (row.PlatformPIXId && row.PlatformPIXId == id) {
+                            currindex = index;
+                            return;
+                        }
+                    })
+                }
+                if (currindex != null) {
+                    $('input:radio[name=pixId]')[currindex].checked = true;
+                    layui.form.render('radio');
+                }
             });
 
             //是否置顶
