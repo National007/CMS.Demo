@@ -110,6 +110,7 @@
     <Compile Include="Org.cs">
       <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="OtherServer\T_User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Relevance.cs">
       <DependentUpon>OpenAuthModels.tt</DependentUpon>
@@ -126,6 +127,7 @@
     <Compile Include="Test.cs">
       <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="T_User.cs" />
     <Compile Include="User.cs">
       <DependentUpon>OpenAuthModels.tt</DependentUpon>
     </Compile>

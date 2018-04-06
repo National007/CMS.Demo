@@ -53,5 +53,6 @@ namespace EntityModels
         public virtual DbSet<WF_ProcessTransitionHistory> WF_ProcessTransitionHistory { get; set; }
         public virtual DbSet<WF_SchemeContent> WF_SchemeContent { get; set; }
         public virtual DbSet<WF_SchemeInfo> WF_SchemeInfo { get; set; }
+        
     }
 }

@@ -53,10 +53,10 @@ namespace CMS.MVC.Controllers
 
         public JsonResult GetList()
         {
-            //var list = _repository.GetList();
-            var list = _repository.GetListAll();
+            var list = _repository.GetList();
+            //var list = _repository.GetListAll();
 
-            var str = _repository.GetType("嘿嘿");
+            //var str = _repository.GetType("嘿嘿");
 
             var layuiGrid = new LayuiGrid();
             layuiGrid.count = list.Count();

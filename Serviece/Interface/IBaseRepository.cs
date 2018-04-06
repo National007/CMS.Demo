@@ -66,5 +66,10 @@ namespace Serviece.Interface
         /// <returns></returns>
         IList<T> ExecuteProcedureList<T>(string commandText, params object[] parameters);
         #endregion
+
+        #region 跨服务器访问数据库表
+        IEnumerable<T> ExecuteSql<T>(string tableName, string condition);
+        #endregion
+
     }
 }

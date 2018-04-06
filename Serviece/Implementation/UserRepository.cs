@@ -6,13 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Serviece.Interface;
 using System.Data.SqlClient;
+using EntityModels.OtherServer;
 
 namespace Serviece.Implementation
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
+
+
         public List<User> GetList()
         {
+            var list = this.ExecuteSql<T_User>("T_User",string.Empty);
             return GetAll().ToList();
         }
 

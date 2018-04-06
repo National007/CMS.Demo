@@ -13,6 +13,10 @@ using EntityFramework.Extensions;
 using EntityModels;
 using Serviece.Interface;
 using WebModels;
+using System.Configuration;
+using WebModels.Common;
+using System.Reflection;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Serviece.Implementation
 {
@@ -148,5 +152,34 @@ namespace Serviece.Implementation
         }
 
         #endregion
+
+        #region 跨服务器访问数据库表
+        private string connStr = "SELECT * FROM OPENROWSET ( 'SQLOLEDB' , '{1}' ; '{2}' ; '{3}' ,{4}.dbo.{5}) {6} ";
+
+        private readonly string serverIP = ConfigurationManager.AppSettings["ServerIP"];
+        private readonly string userName = ConfigurationManager.AppSettings["UserName"];
+        private readonly string pwd = ConfigurationManager.AppSettings["Password"];
+        private readonly string database = ConfigurationManager.AppSettings["Database"];
+        
+        /// <summary>
+        /// 返回指定服务器数据库表内容
+        /// </summary>
+        /// <typeparam name="T">数据表</typeparam>
+        /// <param name="configuration">数据库连接字段 内容不可为空</param>
+        /// <param name="tableName">表名</param>
+        /// <param name="fields">返回的表字段</param>
+        /// <param name="condition">查询条件字符串</param>
+        /// <param name="parameters">参数值</param>
+        /// <returns>指定表数据集合</returns>
+        public IEnumerable<T> ExecuteSql<T>(string tableName, string condition)
+        {
+            string sql = string.Format(@"
+SELECT * FROM OPENROWSET ( 'SQLOLEDB' , '{0}' ; '{1}' ; '{2}' ,{3}.dbo.{4}) {5}"
+                                        ,serverIP,userName,pwd,database,tableName,condition);
+            
+            return this.SqlQuery<T>(sql);
+        }
+        #endregion
+
     }
 }
