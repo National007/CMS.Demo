@@ -16,7 +16,7 @@ namespace Serviece.Implementation
 
         public List<User> GetList()
         {
-            var list = this.ExecuteSql<T_User>("T_User",string.Empty);
+            var list = this.ExecuteSql<T_User>("T_User", "where UserName like '%汪%'");
             return GetAll().ToList();
         }
 
