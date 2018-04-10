@@ -194,6 +194,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bootstrap.css" />
     <Content Include="css\index.css" />
     <Content Include="css\public.css" />
     <Content Include="favicon.ico" />
@@ -689,6 +690,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LayouyEmpty.cshtml" />
+    <Content Include="Views\Home\LogDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

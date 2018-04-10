@@ -46,6 +46,11 @@ namespace CMS.MVC.Controllers
             return View();
         }
 
+        public ActionResult LogDetail()
+        {
+            return View();
+        }
+
         public ActionResult NewsList()
         {
             return View();
@@ -53,8 +58,8 @@ namespace CMS.MVC.Controllers
 
         public JsonResult GetList()
         {
-            var list = _repository.GetList();
-            //var list = _repository.GetListAll();
+            //var list = _repository.GetList();
+            var list = _repository.GetListAll();
 
             //var str = _repository.GetType("嘿嘿");
 

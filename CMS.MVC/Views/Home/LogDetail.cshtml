@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LogDetail</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row" style="padding: 8px;">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center">未设置操作描述</h3>
+                    </div>
+                    <div class="list-group">
+                        <span class="list-group-item">
+                            请求地址：/system/log/index
+                        </span>
+                        <span class="list-group-item">
+                            操作耗时：5ms
+                        </span>
+                        <span class="list-group-item">
+                            传递参数：{"type":["operate"]}
+                        </span>
+                        <span class="list-group-item">
+                            异常跟踪：SQL Server 阻止了对组件“Ad Hoc Distributed Queries”的 STATEMENT“OpenRowset/OpenDatasource”的访问，因为此组件已作为此服务器安全配置的一部分而被关闭。系统管理员可以通过使用 sp_configure 启用“Ad Hoc Distributed Queries”。有关启用“Ad Hoc Distributed Queries”
+                            1.开启Ad Hoc Distributed Queries组件，在sql查询编辑器中执行如下语句：
+
+                            exec sp_configure 'show advanced options',1
+                            reconfigure
+                            exec sp_configure 'Ad Hoc Distributed Queries',1
+                            reconfigure
+
+
+                            2.关闭Ad Hoc Distributed Queries组件，在sql查询编辑器中执行如下语句：
+
+                            exec sp_configure 'Ad Hoc Distributed Queries',0
+                            reconfigure
+                            exec sp_configure 'show advanced options',0
+                            reconfigure
+                        </span>
+                        <span class="list-group-item">
+                            操作人员：TopJUI前端框架
+                        </span>
+                        <span class="list-group-item">
+                            操作者IP：115.204.93.208
+                        </span>
+                        <span class="list-group-item">
+                            操作日期：2018-04-10
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
