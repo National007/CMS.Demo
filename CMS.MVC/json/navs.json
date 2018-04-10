@@ -4,7 +4,7 @@
 			"title": "文章列表",
 			"icon": "icon-text",
 			"href": "/Home/NewsList",
-			"spread": true
+			"spread": false
 		},
 		{
 			"title": "图片管理",

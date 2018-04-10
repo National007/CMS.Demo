@@ -55,7 +55,7 @@
                         <a href="javascript:;"><i class="seraph icon-lock"></i><cite>锁屏</cite></a>
                     </li>
                     <li class="layui-nav-item" id="userInfo">
-                        <a href="javascript:;"><img src="/images/face.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">驊驊龔頾</cite></a>
+                        <a href="javascript:;"><img src="/images/face.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">阿宝</cite></a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="seraph icon-ziliao" data-icon="icon-ziliao"></i><cite>个人资料</cite></a></dd>
                             <dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="seraph icon-xiugai" data-icon="icon-xiugai"></i><cite>修改密码</cite></a></dd>
@@ -72,22 +72,23 @@
         <div class="layui-side layui-bg-black">
             <div class="user-photo">
                 <a class="img" title="我的头像"><img src="/images/face.jpg" class="userAvatar"></a>
-                <p>你好！<span class="userName">驊驊龔頾</span>, 欢迎登录</p>
+                <p>你好！<span class="userName">阿宝</span>, 欢迎登录</p>
             </div>
             <!-- 搜索 -->
             <div class="layui-form component">
-                <select name="search" id="search" lay-search lay-filter="searchPage">
-                    <option value="">搜索页面或功能</option>
-                    <option value="1">layer</option>
-                    <option value="2">form</option>
-                </select>
-                <i class="layui-icon">&#xe615;</i>
+                @*<select name="search" id="search" lay-search lay-filter="searchPage">
+            <option value="">搜索页面或功能</option>
+            <option value="1">layer</option>
+            <option value="2">form</option>
+        </select>
+        <i class="layui-icon">&#xe615;</i>*@
+                <input type="text" class="layui-input layui-input-sm" style="border-radius: 15px;" id="jstree_left_search" name="jstree_left_search" placeholder="快速查找...">
             </div>
             <div class="navBar layui-side-scroll" id="navBar">
                 <ul class="layui-nav layui-nav-tree">
-                    <li class="layui-nav-item layui-this">
+                    @*<li class="layui-nav-item">
                         <a href="javascript:;" data-url="page/main.html"><i class="layui-icon" data-icon=""></i><cite>后台首页</cite></a>
-                    </li>
+                    </li>*@
                 </ul>
             </div>
         </div>

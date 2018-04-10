@@ -51,6 +51,11 @@ namespace CMS.MVC.Controllers
             return View();
         }
 
+        public ActionResult MenuList()
+        {
+            return View();
+        }
+
         public ActionResult NewsList()
         {
             return View();

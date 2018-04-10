@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "菜单列表";
+}
+<!--左侧开始-->
+<div class="layui-col-md2">
+    <blockquote class="layui-elem-quote">
+        <button class="btn btn-sm btn-primary open_all">展开列表</button>
+        <button class="btn btn-success btn-sm del-left-tree">更新列表</button>
+    </blockquote>
+    <div class="layui-collapse">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title menu-top" style="padding:0;text-align:center;height:39px;line-height:39px;">顶级菜单</h2>
+            <div class="layui-colla-content layui-show">
+                <div class="input-search mb-10">
+                    <input type="text" class="layui-input layui-input-sm" style="border-radius: 15px;" id="jstree_left_search" name="jstree_left_search" placeholder="快速查找...">
+                </div>
+                <div class="phptwo-left-tree" id="menuLfetTree">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--左侧结束-->
