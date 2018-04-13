@@ -56,7 +56,21 @@ namespace CMS.MVC.Controllers
             return View();
         }
 
+        public ActionResult EditMenu()
+        {
+            return View();
+        }
+
         public ActionResult NewsList()
+        {
+            return View();
+        }
+
+        public ActionResult EmailSet()
+        {
+            return View();
+        }
+        public ActionResult TreeTable()
         {
             return View();
         }

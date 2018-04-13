@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "菜单编辑";
+}
+<link href="~/Scripts/layui/css/layui.css" rel="stylesheet" />
+<div class="layui-row">
+    <div class="layui-col-md10">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">上级菜单</label>
+                    <div class="layui-input-inline">
+                        <input type="hidden" name="id" value="" class="layui-input">
+                        <input type="hidden" name="pid" id="pid" value="" class="layui-input">
+                        <input type="text" id="topTtitle" value="顶级菜单" class="layui-input" readonly="readonly">
+                    </div>
+                    <a class="btn btn-primary" id="sel-top">选择上级</a>
+                    <a class="btn btn-info set-top">设为顶级</a>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图标&名称</label>
+                <div class="layui-input-block">
+                    <a class="layui-btn layui-btn-primary fl-l mr-5 icon-pick" style="width: 41px;padding: 0 10px;"><i class="iconfont layui-e-caidan" style="font-size:18px;color:#76838f;"></i></a>
+                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单名称" value="" class="layui-input form-input-70">
+                    <input type="hidden" name="icon" id="icon" value="iconfont layui-e-caidan" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">菜单链接</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" value="" lay-verify="name" autocomplete="off" placeholder="规范：admin/index/index" class="layui-input form-input-80">
+                    <div class="layui-form-mid layui-word-aux">顶级菜单请填写英文字母表示</div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">排序</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="rank" autocomplete="off" value="" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">默认0，数字越小越靠前</div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="margin-bottom:0px;">
+                <div class="layui-inline">
+                    <label class="layui-form-label">是否启用</label>
+                    <div class="layui-input-inline" style="width:50px;">
+                        <input type="checkbox" checked="" name="status" lay-skin="switch" lay-text="启用|停用">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:100px;">是否参与日志</label>
+                    <div class="layui-input-inline" style="width:90px;">
+                        <input type="checkbox" name="is_log" lay-skin="switch" lay-text="是|否">
+                    </div>
+                </div>
+                <div class="layui-form-mid layui-word-aux" style="margin-left: 110px;">不启用不可见,参与日志会记录访问情况</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">菜单类型</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="type" value="1" title="菜单" checked="">
+                    <input type="radio" name="type" value="3" title="操作">
+                    <input type="radio" name="type" value="2" title="规则" disabled="">
+                </div>
+                <div class="layui-form-mid layui-word-aux">规则是权限认证的规则（暂不开放），例：积分小于100不可访问</div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="setMenu">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

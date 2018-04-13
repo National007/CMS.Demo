@@ -692,6 +692,9 @@
     <Content Include="Views\Shared\_LayouyEmpty.cshtml" />
     <Content Include="Views\Home\LogDetail.cshtml" />
     <Content Include="Views\Home\MenuList.cshtml" />
+    <Content Include="Views\Home\EmailSet.cshtml" />
+    <Content Include="Views\Home\TreeTable.cshtml" />
+    <Content Include="Views\Home\EditMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
