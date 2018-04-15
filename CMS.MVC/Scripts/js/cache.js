@@ -214,13 +214,14 @@ layui.use(['form','jquery',"layer"],function() {
                                 '<div class="layui-form-item">'+
                                     '<input type="radio" name="skin" value="默认" title="默认" lay-filter="default" checked="">'+
                                     '<input type="radio" name="skin" value="橙色" title="橙色" lay-filter="orange">'+
-                                    '<input type="radio" name="skin" value="蓝色" title="蓝色" lay-filter="blue">'+
-                                    '<input type="radio" name="skin" value="自定义" title="自定义" lay-filter="custom">'+
-                                    '<div class="skinCustom">'+
-                                        '<input type="text" class="layui-input topColor" name="topSkin" placeholder="顶部颜色" />'+
-                                        '<input type="text" class="layui-input leftColor" name="leftSkin" placeholder="左侧颜色" />'+
-                                        '<input type="text" class="layui-input menuColor" name="btnSkin" placeholder="顶部菜单按钮" />'+
-                                    '</div>'+
+                                    '<input type="radio" name="skin" value="蓝色" title="蓝色" lay-filter="blue">' +
+                                    '<input type="radio" name="skin" value="灰色" title="灰色" lay-filter="blue">' +
+                                    //'<input type="radio" name="skin" value="自定义" title="自定义" lay-filter="custom">'+
+                                    //'<div class="skinCustom">'+
+                                    //    '<input type="text" class="layui-input topColor" name="topSkin" placeholder="顶部颜色" />'+
+                                    //    '<input type="text" class="layui-input leftColor" name="leftSkin" placeholder="左侧颜色" />'+
+                                    //    '<input type="text" class="layui-input menuColor" name="btnSkin" placeholder="顶部菜单按钮" />'+
+                                    //'</div>'+
                                 '</div>'+
                                 '<div class="layui-form-item skinBtn">'+
                                     '<a href="javascript:;" class="layui-btn layui-btn-sm layui-btn-normal" lay-submit="" lay-filter="changeSkin">确定更换</a>'+
@@ -250,6 +251,9 @@ layui.use(['form','jquery',"layer"],function() {
                     }else if($(this).find("div").text() == "默认"){
                         skinColor = "";
                     }
+                    else if ($(this).find("div").text() == "灰色") {
+                        skinColor = "gray";
+                    }
                     if($(this).find("div").text() != "自定义"){
                         $(".topColor,.leftColor,.menuColor").val('');
                         $("body").removeAttr("class").addClass("main_body "+skinColor+"");
@@ -278,6 +282,9 @@ layui.use(['form','jquery',"layer"],function() {
                             skinColor = "blue";
                         }else if(data.field.skin == "默认"){
                             skinColor = "";
+                        }
+                        else if (data.field.skin == "灰色") {
+                            skinColor = "gray";
                         }
                         window.sessionStorage.setItem("skin",skinColor);
                     }else{

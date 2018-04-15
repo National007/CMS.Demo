@@ -35,6 +35,7 @@
         border: 0px;
         display: none;
     }
+
 </style>
 <script src="~/Scripts/jquery.form.js"></script>
 
@@ -90,22 +91,16 @@
 </script>
 @section Foot{
     <script>
-        //function closeFun() {
-        //    alert("页面加载完毕");
-        //}
-
+        
         var rightDataList = [];
         var leftDataList = [];
         layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
             var form = layui.form,
-                layer = parent.layer === undefined ? layui.layer : top.layer,
+                layer =layui.layer,
                 $ = layui.jquery,
                 laydate = layui.laydate,
                 laytpl = layui.laytpl,
                 table = layui.table;
-
-            
-
             //新闻列表
             //var tableIns = table.render({
             //    elem: '#newsList',
@@ -154,7 +149,10 @@
                     { field: 'Sex', title: '性别', width: 60, align: 'center', templet: "#sexTpl" },
                     { field: 'Status', title: '状态', align: 'center', },
 
-                ]]
+                ]],
+                //done: function () {
+                //    alert("数据加载完后的响应");
+                //}
             });
             
 
@@ -207,12 +205,15 @@
                 console.log($(this).parents("tr").find('input[name="SID"]').val());
             });
 
+            //单击行
             var $mylist = $("#newsList").next('.layui-table-view').find('div.layui-table-body');
             $mylist.click(function (event) {
                 //alert($(event.target).closest("tr")[0].outerHTML)
                 // $(event.target).closest("tr")[0].addClass("layui-table-click");
                 $("#newsList").next('.layui-table-view').find('div.layui-table-body').find("tr").removeClass("layui-table-click");
                 $(event.target).closest("tr").addClass("layui-table-click");
+                alert((event.target).closest("tr").attr("data-index"));
+                //$(".layui-table-fixed").find("tr").addClass
 
             });
 
