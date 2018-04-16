@@ -70,7 +70,7 @@ namespace CMS.MVC.Controllers
         {
             return View();
         }
-        public ActionResult TreeTable()
+        public ActionResult Decrypt()
         {
             return View();
         }

@@ -182,6 +182,7 @@
     <Compile Include="AutoMapper\MapperExtention.cs" />
     <Compile Include="AutoMapper\RegisterAutomapper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Filter\LogFilter.cs" />
@@ -560,7 +561,9 @@
     <Content Include="Scripts\js\bodyTab.js" />
     <Content Include="Scripts\js\cache.js" />
     <Content Include="Scripts\js\cacheUserInfo.js" />
+    <Content Include="Scripts\js\Extend.js" />
     <Content Include="Scripts\js\index.js" />
+    <Content Include="Scripts\js\loading.js" />
     <Content Include="Scripts\js\login.js" />
     <Content Include="Scripts\js\main.js" />
     <Content Include="Scripts\layui\config\layui.config.js" />
@@ -693,8 +696,10 @@
     <Content Include="Views\Home\LogDetail.cshtml" />
     <Content Include="Views\Home\MenuList.cshtml" />
     <Content Include="Views\Home\EmailSet.cshtml" />
-    <Content Include="Views\Home\TreeTable.cshtml" />
     <Content Include="Views\Home\EditMenu.cshtml" />
+    <Content Include="Views\Demo\CheckList.cshtml" />
+    <Content Include="Views\Demo\RadioList.cshtml" />
+    <Content Include="Views\Home\Decrypt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

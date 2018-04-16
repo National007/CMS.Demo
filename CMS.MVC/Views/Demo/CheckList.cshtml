@@ -1,42 +1,9 @@
 ﻿@{
-    ViewBag.Title = "文章列表";
+    ViewBag.Title = "复选框列表";
     var woman = 0;
 
 }
-<style>
-    a {
-        text-decoration: none;
-    }
 
-        a[class="button-selectimg"], input[type='submit'] {
-            color: #00A2D4;
-            padding: 4px 6px;
-            border: 1px dashed #00A2D4;
-            border-radius: 2px;
-        }
-
-    .input-file {
-        margin: 200px 300px;
-    }
-
-    input[id="avatval"] {
-        padding: 3px 6px;
-        padding-left: 10px;
-        border: 1px solid #E7EAEC;
-        width: 230px;
-        height: 25px;
-        line-height: 25px;
-        border-left: 3px solid #3FB7EB;
-        background: #FAFAFB;
-        border-radius: 2px;
-    }
-
-    input[type='file'] {
-        border: 0px;
-        display: none;
-    }
-</style>
-<script src="~/Scripts/jquery.form.js"></script>
 
 <blockquote class="layui-elem-quote quoteBox">
     <form class="layui-form">
@@ -54,15 +21,6 @@
         </div>
 
     </form>
-    <form id="fileForm" name="fileForm" action="" method="post" enctype="multipart/form-data">
-            <input type="text" id="avatval" placeholder="请选择文件···" readonly="readonly" style="vertical-align: middle;" />
-            <input type="file" name="avatar" id="avatar" />
-            <a href="javascript:void(0);" class="button-selectimg" id="avatsel">选择文件</a>
-
-            <div class="layui-inline">
-                <a class="layui-btn" id="upload">导入数据</a>
-            </div>
-        </form>
 </blockquote>
 <table id="newsList" lay-filter="newsList"></table>
 <!--审核状态-->
@@ -77,20 +35,8 @@
     <a href="https://www.baidu.com/" class="layui-red" style="text-decoration:underline" target="_blank" title="{{d.Name}}">{{d.Name}}</a>
 </script>
 
-<!--操作-->
-<script type="text/html" id="newsListBar">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
-    <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="look">预览</a>
-</script>
 @section Foot{
     <script>
-        //function closeFun() {
-        //    alert("页面加载完毕");
-        //}
-
-        var rightDataList = [];
-        var leftDataList = [];
         layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
             var form = layui.form,
                 layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -99,7 +45,7 @@
                 laytpl = layui.laytpl,
                 table = layui.table;
 
-            
+
 
             //新闻列表
             //var tableIns = table.render({
@@ -133,46 +79,45 @@
             //});
             var tableIns = table.render({
                 elem: '#newsList',
-                url: 'GetList',
+                url: '/Home/GetList',
                 cellMinWidth: 95,
                 page: true,
                 height: "full-110",
                 //limit: 20,
                 //limits: [10, 15, 20, 25],
                 cols: [[
-                    { field: 'Id', title: '', templet: "#radioTpl", width:50},
-                    { type: 'numbers', fixed: "left", width: 50 },
+                    { type: "checkbox",title:'全选', fixed: "left", width: 50 },
+                    { type: 'numbers', title:'序号', fixed: "left", width: 50 },
                     { field: 'Account', title: '姓名', width: 100, align: "center" },
                     { field: 'Password', title: '密码', width: 100, },
                     { field: 'Name', title: '姓名', width: 100, align: 'center',templet:"#Name",event:"setName" },
                     { field: 'Sex', title: '性别', width: 60, align: 'center', templet: "#sexTpl" },
                     { field: 'Status', title: '状态', align: 'center', },
-                    { title: '操作', width: 170, templet: '#newsListBar', fixed: "right", align: "center" }
+
                 ]]
             });
-            
-            
-            var $mylist = $("#newsList").next('.layui-table-view').find('div.layui-table-body');
-            $mylist.click(function (event) {
-                //alert($(event.target).closest("tr")[0].outerHTML)
-                // $(event.target).closest("tr")[0].addClass("layui-table-click");
-                $("#newsList").next('.layui-table-view').find('div.layui-table-body').find("tr").removeClass("layui-table-click");
-                $(event.target).closest("tr").addClass("layui-table-click");
 
+
+            //单击行勾选checkbox事件
+            $(document).on("click", ".layui-table-body table.layui-table tbody tr", function () {
+                var index = $(this).attr('data-index');
+                var tableBox = $(this).parents('.layui-table-box');
+                //存在固定列
+                if (tableBox.find(".layui-table-fixed.layui-table-fixed-l").length > 0) {
+                    tableDiv = tableBox.find(".layui-table-fixed.layui-table-fixed-l");
+                } else {
+                    tableDiv = tableBox.find(".layui-table-body.layui-table-main");
+                }
+                var checkCell = tableDiv.find("tr[data-index=" + index + "]").find("td div.laytable-cell-checkbox div.layui-form-checkbox I");
+                if (checkCell.length > 0) {
+                    checkCell.click();
+                }
             });
 
-            //是否置顶
-            form.on('switch(newsTop)', function (data) {
-                var index = layer.msg('修改中，请稍候', { icon: 16, time: false, shade: 0.8 });
-                setTimeout(function () {
-                    layer.close(index);
-                    if (data.elem.checked) {
-                        layer.msg("置顶成功！");
-                    } else {
-                        layer.msg("取消置顶成功！");
-                    }
-                }, 500);
-            })
+            $(document).on("click", "td div.laytable-cell-checkbox div.layui-form-checkbox", function (e) {
+                e.stopPropagation();
+            });
+
 
             //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
             $(".search_btn").on("click", function () {
@@ -224,7 +169,32 @@
             $(".addNews_btn").click(function () {
                 addNews();
             })
-            
+
+            //批量删除
+            $(".delAll_btn").click(function () {
+                var checkStatus = table.checkStatus('newsList'),
+                    data = checkStatus.data,
+                    newsId = [];
+                if (data.length > 0) {
+                    for (var i in data) {
+                        newsId.push(data[i].Account);
+                    }
+                    console.log(newsId);
+                    layer.confirm('确定删除选中的文章？', { icon: 3, title: '提示信息' }, function (index) {
+                        // $.get("删除文章接口",{
+                        //     newsId : newsId  //将需要删除的newsId作为参数传入
+                        // },function(data){
+                        layer.msg(arrTostr(newsId));
+
+                        //tableIns.reload();
+                        //layer.close(index);
+                        // })
+                    })
+                } else {
+                    layer.msg("请选择需要删除的文章");
+                }
+            })
+
             //列表操作
             table.on('tool(newsList)', function (obj) {
                 var layEvent = obj.event,
@@ -249,64 +219,7 @@
                 //    layer.alert("此功能需要前台展示，实际开发中传入对应的必要参数进行文章内容页面访问")
                 //}
             });
-            //选择文件按钮
-            $("#avatsel").click(function () {
-                $("input[type='file']").trigger('click');
-            });
-            //文件框
-            $("#avatval").click(function () {
-                $("input[type='file']").trigger('click');
-            });
-
-            $("input[type='file']").change(function () {
-                $("#avatval").val($(this).val());
-            });
-
-            $("#upload").click(function () {
-                //console.log($("#avatval").val());
-                //console.log($("#fileForm").serialize());
-
-                var file = $('#avatval').val();
-                if (file != "") {
-                    var stuff = file.substring(file.lastIndexOf('.'), file.length);
-                    if (stuff != '.xls' && stuff != '.xlsx') {
-                        layer.alert("文件类型不正确，请选择Excel文件！");
-                        return;
-                    }
-                } else {
-                    layer.alert("请上传数据文件！");
-                    return;
-                }
-
-                var options = {
-                    url: "ImportExecl",
-                    type: "POST",
-                    async: false,
-                    data: $("#fileForm").serialize(),
-                    beforeSend: function () {
-                        msgIndex = layer.msg('正在导入数据…', { icon: 16, time: false });
-                    },
-                    success: function (dd) {
-                        if (!dd.Success) {
-                            layer.alert("很遗憾,提交失败。 <br /> " + dd.Message, function () {
-                                document.getElementById("files").value = "";
-                            });
-                            return;
-                        } else {
-                            layer.alert("导入成功", function (index) {
-                                layer.msg('我关闭了', { icon: 16 });
-                                layer.close(index);
-                            });
-                        }
-                    }
-                };
-                //console.log($("#fileForm").serialize());
-                $("#fileForm").ajaxSubmit(options);
-                return;
-
-            });
 
         })
-        
     </script>
 }
