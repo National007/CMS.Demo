@@ -9,6 +9,33 @@
     @Scripts.Render("~/bundles/layuijs")
     <script src="~/Scripts/js/Extend.js"></script>
     @RenderSection("Styles", required: false)
+    <script>
+
+        //$().ready(function () {
+        //    //do something
+        //    layui.use('layer', function () {
+        //        //加载层-风格4
+        //        layui.layer.msg('正在加载页面', {
+        //            icon: 16
+        //          , shade: 0.6
+        //        });
+        //    });
+        //})
+
+
+        window.onbeforeunload=function Load() {
+            layui.use('layer', function () {
+                //加载层-风格4
+                //layui.layer.msg('正在加载页面', {
+                //    icon: 16
+                //  , shade: 0.6
+                //});
+
+                //layui.layer.msg('正在加载页面', { icon: 16, shade: 0.8 });
+            });
+        }
+
+    </script>
 </head>
 <body class="childrenBody">
     <script src="~/Scripts/js/loading.js"></script>
@@ -18,39 +45,41 @@
 
 <!--禁止鼠标右键查看源代码-->
 @*<script>
-    function stop() { return false; }
-    document.oncontextmenu = stop;
-</script>*@
+        function stop() { return false; }
+        document.oncontextmenu = stop;
+    </script>*@
 <script>
-        $(function () {
-    //        console.log("一张网页，要经历怎样的过程，才能抵达用户面前？\n"+
-    //"一位新人，要经历怎样的成长，才能站在技术之巅？\n"+
-    //"            探寻这里的秘密；\n"+
-    //"            体验这里的挑战；\n"+
-    //"            成为这里的主人；\n"+
-    //            "            加入百度，加入网页搜索，你，可以影响世界。");
+    $(function () {
+        //        console.log("一张网页，要经历怎样的过程，才能抵达用户面前？\n"+
+        //"一位新人，要经历怎样的成长，才能站在技术之巅？\n"+
+        //"            探寻这里的秘密；\n"+
+        //"            体验这里的挑战；\n"+
+        //"            成为这里的主人；\n"+
+        //            "            加入百度，加入网页搜索，你，可以影响世界。");
 
-    //        console.log("玩玩的\n\t别当真");
+        //        console.log("玩玩的\n\t别当真");
 
-            $.ajaxSetup({
-                complete: function (xhr, textStatus) {
-                    if (xhr.status == 401) {
-                        console.info(new Date().toDateString() + "：身份验证失败！");
-                    }
+        $.ajaxSetup({
+            complete: function (xhr, textStatus) {
+                if (xhr.status == 401) {
+                    console.info(new Date().toDateString() + "：身份验证失败！");
                 }
-            })
+            }
+        })
 
-            //alert("正在打开页面");
+        //alert("正在打开页面");
 
 
-            //加载层-风格4
+        //加载层-风格4
 
-           //layui.layer.msg('正在加载页面…', {
-           //     icon: 16
-           //     , shade: 0.3
-           // });
+        //layui.layer.msg('正在加载页面…', {
+        //     icon: 16
+        //     , shade: 0.3
+        // });
 
-        });
-    </script>
+    });
+
+
+</script>
 @RenderSection("Foot", required: false)
 </html>

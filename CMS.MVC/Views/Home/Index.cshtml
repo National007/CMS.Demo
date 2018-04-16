@@ -70,25 +70,22 @@
         </div>
         <!-- 左侧导航 -->
         <div class="layui-side layui-bg-black">
-            <div class="user-photo">
+            @*<div class="user-photo">
                 <a class="img" title="我的头像"><img src="/images/face.jpg" class="userAvatar"></a>
                 <p>你好！<span class="userName">阿宝</span>, 欢迎登录</p>
-            </div>
+            </div>*@
             <!-- 搜索 -->
-            <div class="layui-form component">
+            <div class="layui-form component" style="padding:5px;">
                 @*<select name="search" id="search" lay-search lay-filter="searchPage">
-            <option value="">搜索页面或功能</option>
-            <option value="1">layer</option>
-            <option value="2">form</option>
-        </select>
-        <i class="layui-icon">&#xe615;</i>*@
+                        <option value="">搜索页面或功能</option>
+                        <option value="1">layer</option>
+                        <option value="2">form</option>
+                    </select>
+                    <i class="layui-icon">&#xe615;</i>*@
                 <input type="text" class="layui-input layui-input-sm" style="border-radius: 15px;" id="jstree_left_search" name="jstree_left_search" placeholder="快速查找...">
             </div>
             <div class="navBar layui-side-scroll" id="navBar">
                 <ul class="layui-nav layui-nav-tree">
-                    @*<li class="layui-nav-item">
-                        <a href="javascript:;" data-url="page/main.html"><i class="layui-icon" data-icon=""></i><cite>后台首页</cite></a>
-                    </li>*@
                 </ul>
             </div>
         </div>
@@ -128,5 +125,10 @@
         <script src="~/Scripts/layui/layui.js?r=@(new Random().Next(10000000))"></script>
         <script src="~/Scripts/js/index.js?r=@(new Random().Next(10000000))"></script>
         <script src="~/Scripts/js/cache.js?r=@(new Random().Next(10000000))"></script>
+        @*<script>
+            layui.use('layer', function () {
+                top.layer.alert("弹出框");
+                });
+        </script>*@
 </body>
 </html>

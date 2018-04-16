@@ -35,6 +35,7 @@
         border: 0px;
         display: none;
     }
+
 </style>
 <script src="~/Scripts/jquery.form.js"></script>
 
@@ -85,22 +86,16 @@
 </script>
 @section Foot{
     <script>
-        //function closeFun() {
-        //    alert("页面加载完毕");
-        //}
-
+        
         var rightDataList = [];
         var leftDataList = [];
         layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
             var form = layui.form,
-                layer = parent.layer === undefined ? layui.layer : top.layer,
+                layer =layui.layer,
                 $ = layui.jquery,
                 laydate = layui.laydate,
                 laytpl = layui.laytpl,
                 table = layui.table;
-
-            
-
             //新闻列表
             //var tableIns = table.render({
             //    elem: '#newsList',
@@ -147,11 +142,63 @@
                     { field: 'Name', title: '姓名', width: 100, align: 'center',templet:"#Name",event:"setName" },
                     { field: 'Sex', title: '性别', width: 60, align: 'center', templet: "#sexTpl" },
                     { field: 'Status', title: '状态', align: 'center', },
-                    { title: '操作', width: 170, templet: '#newsListBar', fixed: "right", align: "center" }
-                ]]
+
+                ]],
+                //done: function () {
+                //    alert("数据加载完后的响应");
+                //}
             });
             
-            
+
+            //单击行勾选checkbox事件
+            //$(document).on("click", ".layui-table-body table.layui-table tbody tr", function () {
+            //    var index = $(this).attr('data-index');
+            //    var tableBox = $(this).parents('.layui-table-box');
+            //    //存在固定列
+            //    if (tableBox.find(".layui-table-fixed.layui-table-fixed-l").length > 0) {
+            //        tableDiv = tableBox.find(".layui-table-fixed.layui-table-fixed-l");
+            //    } else {
+            //        tableDiv = tableBox.find(".layui-table-body.layui-table-main");
+            //    }
+            //    var checkCell = tableDiv.find("tr[data-index=" + index + "]").find("td div.laytable-cell-checkbox div.layui-form-checkbox I");
+            //    if (checkCell.length > 0) {
+            //        checkCell.click();
+            //    }
+            //});
+
+            //$(document).on("click", "td div.laytable-cell-checkbox div.layui-form-checkbox", function (e) {
+            //    e.stopPropagation();
+            //});
+
+            //单击行勾选radio事件
+            $(document).on("click", ".layui-table-body table.layui-table tbody tr", function () {
+                var index = $(this).attr('data-index');
+                var tableBox = $(this).parents('.layui-table-box');
+                //存在固定列
+                if (tableBox.find(".layui-table-fixed.layui-table-fixed-l").length > 0) {
+                    tableDiv = tableBox.find(".layui-table-fixed.layui-table-fixed-l");
+                } else {
+                    tableDiv = tableBox.find(".layui-table-body.layui-table-main");
+                }
+                //var checkCell = tableDiv.find("tr[data-index=" + index + "]").find("td div.laytable-cell-checkbox div.layui-form-checkbox I");
+                //if (checkCell.length > 0) {
+                //    checkCell.click();
+                //}
+                var radioCell = tableBox.find("tr[data-index=" + index + "]").find("td div.layui-table-cell div.layui-form-radio I");
+                if (radioCell.length > 0) {
+                    radioCell.click();
+                }
+            });
+
+            $(document).on("click", "td div.layui-table-cell div.layui-form-radio", function (e) {
+                e.stopPropagation();
+                //console.log(e);
+                var Id = $(this).parents("tr").find('input[name="SID"]').val();
+                var UserName = $(this).parents("tr").find('td').val();
+                console.log(Id);
+                console.log($(this).parents("tr").find('input[name="SID"]').val());
+            });
+
             var $mylist = $("#newsList").next('.layui-table-view').find('div.layui-table-body');
             $mylist.click(function (event) {
                 //alert($(event.target).closest("tr")[0].outerHTML)

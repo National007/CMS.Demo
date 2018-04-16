@@ -116,7 +116,10 @@ iframe{ position:absolute; height:100%; width:100%; border:none;}
 .orange .layui-bg-black{ background-color:#e47214 !important; }
 /*蓝色*/
 .blue .layui-layout-admin .layui-header{ background-color:#3396d8 !important; }
-.blue .layui-bg-black,.blue .hideMenu{ background-color:#146aa2 !important; }
+.blue .layui-bg-black{ background-color:#146aa2 !important; }
+/*灰色*/
+.gray .layui-layout-admin .layui-header{ background-color:#F2F2F2 !important; }
+.gray .layui-bg-black{ background-color:#6F1ADB !important; }
 /*自定义*/
 .skinCustom{ visibility:hidden; }
 .skinCustom input{ width:48%; margin:5px 2% 5px 0; float:left; }
