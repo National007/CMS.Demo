@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KS.Util.Offices.Model
+namespace Application.Offices.Model
 {
     public class ColumnEntity
     {

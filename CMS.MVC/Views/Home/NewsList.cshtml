@@ -3,40 +3,6 @@
     var woman = 0;
 
 }
-<style>
-    a {
-        text-decoration: none;
-    }
-
-        a[class="button-selectimg"], input[type='submit'] {
-            color: #00A2D4;
-            padding: 4px 6px;
-            border: 1px dashed #00A2D4;
-            border-radius: 2px;
-        }
-
-    .input-file {
-        margin: 200px 300px;
-    }
-
-    input[id="avatval"] {
-        padding: 3px 6px;
-        padding-left: 10px;
-        border: 1px solid #E7EAEC;
-        width: 230px;
-        height: 25px;
-        line-height: 25px;
-        border-left: 3px solid #3FB7EB;
-        background: #FAFAFB;
-        border-radius: 2px;
-    }
-
-    input[type='file'] {
-        border: 0px;
-        display: none;
-    }
-
-</style>
 <script src="~/Scripts/jquery.form.js"></script>
 
 <blockquote class="layui-elem-quote quoteBox">
@@ -55,24 +21,39 @@
         </div>
 
     </form>
-    <form id="fileForm" name="fileForm" action="" method="post" enctype="multipart/form-data">
-            <input type="text" id="avatval" placeholder="请选择文件···" readonly="readonly" style="vertical-align: middle;" />
-            <input type="file" name="avatar" id="avatar" />
-            <a href="javascript:void(0);" class="button-selectimg" id="avatsel">选择文件</a>
 
-            <div class="layui-inline">
-                <a class="layui-btn" id="upload">导入数据</a>
-            </div>
-        </form>
+    <form id="fileForm" name="fileForm" action="" method="post" enctype="multipart/form-data">
+
+        <div class="layui-input-inline">
+            <input lay-verify="required" id="avatval" placeholder="excel文件" class="layui-input" readonly>
+        </div>
+
+        <input type="file" name="avatar" id="avatar" style="display:none" />
+
+
+        <div class="layui-inline">
+            <button type="button" class="layui-btn layui-btn-primary" id="avatsel">
+                <i class="layui-icon">&#xe67c;</i>选择文件
+            </button>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn" id="upload">导入数据</a>
+        </div>
+    </form>
 </blockquote>
 <table id="newsList" lay-filter="newsList"></table>
 <!--审核状态-->
 <script type="text/html" id="sexTpl">
     {{#  if(d.Sex == "1"){ }}
-    <span class="layui-red">Boy</span>
-    {{#  } else if(d.Sex == '@woman'){ }}
-    <span class="layui-blue">Girl</span>
+    <span class="layui-red">{{d.SexName}}</span>
+    {{#  } if(d.Sex == '@woman'){ }}
+    <span class="layui-blue">{{d.SexName}}</span>
     {{#  } }}
+</script>
+<script type="text/html" id="radioTpl">
+    <div>
+        <input type="radio" lay-skin="primary" name="SID" value="{{d.Id}}" lay-event="radio">
+    </div>
 </script>
 <script type="text/html" id="Name">
     <a href="https://www.baidu.com/" class="layui-red" style="text-decoration:underline" target="_blank" title="{{d.Name}}">{{d.Name}}</a>
@@ -86,12 +67,12 @@
 </script>
 @section Foot{
     <script>
-        
+
         var rightDataList = [];
         var leftDataList = [];
         layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
             var form = layui.form,
-                layer =layui.layer,
+                layer = layui.layer,
                 $ = layui.jquery,
                 laydate = layui.laydate,
                 laytpl = layui.laytpl,
@@ -135,12 +116,12 @@
                 //limit: 20,
                 //limits: [10, 15, 20, 25],
                 cols: [[
-                    { field: 'Id', title: '', templet: "#radioTpl", width:50},
+                    { field: 'Id', fixed:'left', templet: "#radioTpl", width: 50 },
                     { type: 'numbers', fixed: "left", width: 50 },
-                    { field: 'Account', title: '姓名', width: 100, align: "center" },
+                    { field: 'Account', title: '姓名', width: 100, align: "center", sort: true },
                     { field: 'Password', title: '密码', width: 100, },
-                    { field: 'Name', title: '姓名', width: 100, align: 'center',templet:"#Name",event:"setName" },
-                    { field: 'Sex', title: '性别', width: 60, align: 'center', templet: "#sexTpl" },
+                    { field: 'Name', title: '姓名', width: 100, align: 'center', templet: "#Name", event: "setName" },
+                    { field: 'SexName', title: '性别', width: 80, align: 'center', templet: "#sexTpl", sort: true },
                     { field: 'Status', title: '状态', align: 'center', },
 
                 ]],
@@ -149,56 +130,6 @@
                 //}
             });
             
-
-            //单击行勾选checkbox事件
-            //$(document).on("click", ".layui-table-body table.layui-table tbody tr", function () {
-            //    var index = $(this).attr('data-index');
-            //    var tableBox = $(this).parents('.layui-table-box');
-            //    //存在固定列
-            //    if (tableBox.find(".layui-table-fixed.layui-table-fixed-l").length > 0) {
-            //        tableDiv = tableBox.find(".layui-table-fixed.layui-table-fixed-l");
-            //    } else {
-            //        tableDiv = tableBox.find(".layui-table-body.layui-table-main");
-            //    }
-            //    var checkCell = tableDiv.find("tr[data-index=" + index + "]").find("td div.laytable-cell-checkbox div.layui-form-checkbox I");
-            //    if (checkCell.length > 0) {
-            //        checkCell.click();
-            //    }
-            //});
-
-            //$(document).on("click", "td div.laytable-cell-checkbox div.layui-form-checkbox", function (e) {
-            //    e.stopPropagation();
-            //});
-
-            //单击行勾选radio事件
-            $(document).on("click", ".layui-table-body table.layui-table tbody tr", function () {
-                var index = $(this).attr('data-index');
-                var tableBox = $(this).parents('.layui-table-box');
-                //存在固定列
-                if (tableBox.find(".layui-table-fixed.layui-table-fixed-l").length > 0) {
-                    tableDiv = tableBox.find(".layui-table-fixed.layui-table-fixed-l");
-                } else {
-                    tableDiv = tableBox.find(".layui-table-body.layui-table-main");
-                }
-                //var checkCell = tableDiv.find("tr[data-index=" + index + "]").find("td div.laytable-cell-checkbox div.layui-form-checkbox I");
-                //if (checkCell.length > 0) {
-                //    checkCell.click();
-                //}
-                var radioCell = tableBox.find("tr[data-index=" + index + "]").find("td div.layui-table-cell div.layui-form-radio I");
-                if (radioCell.length > 0) {
-                    radioCell.click();
-                }
-            });
-
-            $(document).on("click", "td div.layui-table-cell div.layui-form-radio", function (e) {
-                e.stopPropagation();
-                //console.log(e);
-                var Id = $(this).parents("tr").find('input[name="SID"]').val();
-                var UserName = $(this).parents("tr").find('td').val();
-                console.log(Id);
-                console.log($(this).parents("tr").find('input[name="SID"]').val());
-            });
-
             var $mylist = $("#newsList").next('.layui-table-view').find('div.layui-table-body');
             $mylist.click(function (event) {
                 //alert($(event.target).closest("tr")[0].outerHTML)
@@ -271,7 +202,23 @@
             $(".addNews_btn").click(function () {
                 addNews();
             })
-            
+            //服务端列表排序监听
+            table.on('sort(newsList)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                console.log(obj.field); //当前排序的字段名
+                console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
+                console.log(this); //当前排序的 th 对象
+
+                //尽管我们的 table 自带排序功能，但并没有请求服务端。
+                //有些时候，你可能需要根据当前排序的字段，重新向服务端发送请求，从而实现服务端排序，如：
+                table.reload('newsList', {
+                    initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。 layui 2.1.1 新增参数
+                    , where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
+                        field: obj.field //排序字段
+                        , order: obj.type //排序方式
+                    }
+                });
+            });
+
             //列表操作
             table.on('tool(newsList)', function (obj) {
                 var layEvent = obj.event,
@@ -335,13 +282,15 @@
                     },
                     success: function (dd) {
                         if (!dd.Success) {
-                            layer.alert("很遗憾,提交失败。 <br /> " + dd.Message, function () {
-                                document.getElementById("files").value = "";
+                            layer.alert("很遗憾,提交失败。 <br /> " + dd.Message, function (index) {
+                                $("#avatval").val('');
+                                $("input[type='file']").val('');
+                                layer.close(index);
                             });
                             return;
                         } else {
                             layer.alert("导入成功", function (index) {
-                                layer.msg('我关闭了', { icon: 16 });
+                                layer.msg('我关闭了', { icon: 16,time:1000 });
                                 layer.close(index);
                             });
                         }
@@ -354,6 +303,6 @@
             });
 
         })
-        
+
     </script>
 }

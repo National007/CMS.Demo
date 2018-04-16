@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using WebModels;
 
-namespace CMS.MVC.AutoMapper
+namespace Application.AutoMapper
 {
     public static class MapperExtention
     {

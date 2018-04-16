@@ -1,4 +1,4 @@
-﻿using CMS.MVC.AutoMapper;
+﻿using Application.AutoMapper;
 using Serviece;
 using System;
 using System.Collections.Generic;

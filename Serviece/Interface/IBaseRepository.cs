@@ -46,6 +46,8 @@ namespace Serviece.Interface
         /// </summary>
         /// <param name="entity"></param>
          void Delete(T entity);
+
+        IEnumerable<T> Sort<T>(IEnumerable<T> source, string propertyName, bool asc);
         #endregion
 
         #region  //存储过程、执行脚本

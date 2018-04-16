@@ -29,5 +29,10 @@ namespace WebModels
         public string TypeName { get; set; }
         [ExcelMap("类型ID")]
         public string TypeId { get; set; }
+
+        #region extend
+        [ExcelMap("姓名")]
+        public string SexName { get; set; }
+        #endregion
     }
 }

@@ -7,16 +7,18 @@ using System.Linq;
 using System.Web;
 using WebModels;
 
-namespace CMS.MVC.AutoMapper
+namespace Application.AutoMapper
 {
     public static class RegisterAutomapper
     {
         public static void Excute()
          {
 
-             //Admin
-             Mapper.CreateMap<UserModels, User>();
-             Mapper.CreateMap<User, UserModels>();
+            //Admin
+            Mapper.CreateMap<User, UserModels>()
+                .ForMember(m=>m.SexName,o=>o.MapFrom(d=>d.Sex==1?"A":"B"));
+            Mapper.CreateMap<UserModels, User>();
+             
       
          }
 }

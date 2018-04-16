@@ -1,11 +1,11 @@
-﻿using KS.Util.Offices.Model;
+﻿using Application.Offices.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace KS.Util.Offices
+namespace Application.Offices
 {
     public class ExcelConfig
     {
@@ -16,6 +16,7 @@ namespace KS.Util.Offices
         /// <summary>
         /// 标题
         /// </summary>
+        /// 
         public string Title { get; set; }
         /// <summary>
         /// 前景色

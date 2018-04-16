@@ -17,6 +17,7 @@ using System.Configuration;
 using WebModels.Common;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Concurrent;
 
 namespace Serviece.Implementation
 {
@@ -94,6 +95,24 @@ namespace Serviece.Implementation
                 throw new Exception(e.EntityValidationErrors.First().ValidationErrors.First().ErrorMessage);
             }
         }
+
+        private static readonly ConcurrentDictionary<string, Delegate> exp_handlers = new ConcurrentDictionary<string, Delegate>();
+        public IEnumerable<T> Sort<T>(IEnumerable<T> source, string propertyName, bool asc)
+        {
+            var key = typeof(T).FullName + "," + propertyName;
+            var func = (Func<T, object>)exp_handlers.GetOrAdd(key, k => {
+                var exp_param = Expression.Parameter(typeof(T), "param");
+                var exp_property = Expression.Property(exp_param, propertyName);
+                var exp_return = Expression.Convert(exp_property, typeof(object));
+                return Expression.Lambda<Func<T, object>>(Expression.Block(exp_property, exp_return), exp_param).Compile();
+            });
+
+            //Func<T, object> func = s => s.GetType().GetProperty(propertyName).GetValue(s, null);
+            if (asc)
+                return source.OrderBy(func);
+            return source.OrderByDescending(func);
+        }
+
         #endregion
 
         #region  //存储过程、执行脚本

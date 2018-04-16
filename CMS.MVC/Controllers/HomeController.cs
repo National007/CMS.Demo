@@ -7,14 +7,13 @@ using System.Web;
 using System.Web.Mvc;
 using HH.Tools.ExcelFactory;
 using HH.Tools.FileFactory;
-using CMS.MVC.AutoMapper;
 using WebModels;
 using System.Data;
 using Application;
 using Application.Offices.Excel.Model;
-using KS.Util.Offices;
 using System.IO;
 using System.Collections;
+using CMS.MVC.Model;
 
 namespace CMS.MVC.Controllers
 {
@@ -56,11 +55,6 @@ namespace CMS.MVC.Controllers
             return View();
         }
 
-        public ActionResult EditMenu()
-        {
-            return View();
-        }
-
         public ActionResult NewsList()
         {
             return View();
@@ -70,17 +64,14 @@ namespace CMS.MVC.Controllers
         {
             return View();
         }
-        public ActionResult Decrypt()
-        {
-            return View();
-        }
 
-        public JsonResult GetList()
+        public JsonResult GetList(string field,string order)
         {
             //var list = _repository.GetList();
-            var list = _repository.GetListAll();
-
+            //var list = _repository.GetListAll();
+            //var list = _repository.GetAll(field,order);
             //var str = _repository.GetType("嘿嘿");
+            var list = _repository.GetAllModel(field,order);
 
             var layuiGrid = new LayuiGrid();
             layuiGrid.count = list.Count();
@@ -102,26 +93,44 @@ namespace CMS.MVC.Controllers
         public ActionResult ExportExcelData()
         {
             // ExcelExportModel template = new ExcelExportModel();
-            var list = _repository.GetList().Select(s =>
-            {
-                var model = s.ToModel();
-                return model;
-            });
+            //var list = _repository.GetList().Select(s =>
+            //{
+            //    var model = s.ToModel();
+            //    return model;
+            //});
+            var list = _repository.GetAllModel(string.Empty, string.Empty);
             var template = _excel.ExportExcelToBytes<UserModels>(list);
             return File(template, "text/xlsx", "测试.xlsx");
         }
 
+        public ActionResult ExportExcelData3()
+        {
+            var list = _repository.GetAllModel(string.Empty, string.Empty).Select(s=>
+            {
+                var reportModel = new ReportUserModel();
+                reportModel.Account = s.Account;
+                reportModel.Password = s.Password;
+                reportModel.Name = s.Name;
+                reportModel.SexName = s.SexName;
+                return reportModel;
+            }).ToList();
 
+            var bytes = Application.Excel.ExcelHelper.Export("测试Demo", list, $" 统计时间：{DateTime.Now}至{DateTime.Now.AddDays(1)}", null);
+            return File(bytes, "application/x-xls", HttpUtility.UrlEncode($"测试.xls"));
+        }
+
+        //向服务端模板填充数据
         public void ExportExcelData2()
         {
             string newFileName = "模板.xlsx";
             string templdateName = "/resource/template/测试.xlsx";
             DataTable dt = new DataTable();
-            var list = _repository.GetList().Select(s =>
-            {
-                var model = s.ToModel();
-                return model;
-            });
+            //var list = _repository.GetList().Select(s =>
+            //{
+            //    var model = s.ToModel();
+            //    return model;
+            //});
+            var list = _repository.GetAllModel("","");
             if (list.Count() > 0)
             {
                 dt = DataHelper.ListToDataTable(list.ToList());
@@ -132,20 +141,23 @@ namespace CMS.MVC.Controllers
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
+                    //if (i > 2 && i < 10)
+                    //{
+                    //    continue;
+                    //}
                     for (int j = 0; j < arrLen; j++)
                     {
-                        //if(j>=arrLen-3)
-                        string value = dt.Rows[i][j+2].ToString();
+                        string value = dt.Rows[i][j].ToString();  //List转Table后的值 该索引与Models对应的属性是一致的
                         var enty = new TemplateMode
                         {
-                            row = i + 2,
-                            cell = j,
+                            row = i + 2,  //单元格的行索引
+                            cell = j,     //单元格的列索引
                             value = value
                         };
                         tempList.Add(enty);
                     }
                 }
-                ExcelHelper.ExcelDownload(tempList, templdateName, newFileName);
+               Application.Offices.ExcelHelper.ExcelDownload(tempList, templdateName, newFileName);
             }
             else
             {
@@ -225,7 +237,7 @@ namespace CMS.MVC.Controllers
         /// </summary>
         public MessageModel()
         {
-            this.Success = true;
+            this.Success = false;
         }
         /// <summary>
         /// 是否成功

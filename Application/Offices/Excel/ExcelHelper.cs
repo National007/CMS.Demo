@@ -1,4 +1,4 @@
-﻿using KS.Util.Offices.Model;
+﻿using Application.Offices.Model;
 using NPOI.HPSF;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
@@ -17,7 +17,7 @@ using NPOI.HSSF.Record;
 using System.ComponentModel;
 using Application.Offices.Excel.Model;
 
-namespace KS.Util.Offices
+namespace Application.Offices
 {
     public class ExcelHelper
     {

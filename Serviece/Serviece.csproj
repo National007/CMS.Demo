@@ -113,6 +113,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj">
+      <Project>{eef273d1-c815-454e-8469-9dcc79dfcbfb}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EntityModels\EntityModels.csproj">
       <Project>{0bd9b2e0-2c67-4c43-ac0a-5ff740cd724d}</Project>
       <Name>EntityModels</Name>
