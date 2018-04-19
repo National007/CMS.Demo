@@ -23,7 +23,7 @@
         //})
 
 
-        window.onbeforeunload=function Load() {
+        window.onbeforeunload = function Load() {
             layui.use('layer', function () {
                 //加载层-风格4
                 //layui.layer.msg('正在加载页面', {
@@ -38,7 +38,18 @@
     </script>
 </head>
 <body class="childrenBody">
-    <script src="~/Scripts/js/loading.js"></script>
+    <div class="loaded">
+        <div class="layui-layer-shade" id="layui-layer-shade1" times="1" style="z-index:19900507;background-color:rgb(0, 0, 0); opacity: 0.3;"></div>
+        <div class="layui-layer layui-layer-dialog layui-layer-msg" id="layui-layer1" type="dialog" style="z-index: 19950521; width: 200px; top: 247px; left: 780px;">
+            <div id="" class="layui-layer-content layui-layer-padding">
+                <i class="layui-layer-ico layui-layer-ico16"></i> 正在加载页面…
+            </div>
+            <span class="layui-layer-setwin"></span>
+        </div>
+        <div class="layui-layer-move"></div>
+    </div>
+
+    @*<script src="~/Scripts/js/loading.js"></script>*@
 
     @RenderBody()
 </body>
@@ -49,6 +60,13 @@
         document.oncontextmenu = stop;
     </script>*@
 <script>
+    window.onbeforeunload = function () {
+        return "";
+    }
+    window.onload = function () {
+        $(".loaded").remove();
+    }
+
     $(function () {
         //        console.log("一张网页，要经历怎样的过程，才能抵达用户面前？\n"+
         //"一位新人，要经历怎样的成长，才能站在技术之巅？\n"+
@@ -58,7 +76,8 @@
         //            "            加入百度，加入网页搜索，你，可以影响世界。");
 
         //        console.log("玩玩的\n\t别当真");
-
+       
+        
         $.ajaxSetup({
             complete: function (xhr, textStatus) {
                 if (xhr.status == 401) {
@@ -66,6 +85,8 @@
                 }
             }
         })
+
+        
 
         //alert("正在打开页面");
 
