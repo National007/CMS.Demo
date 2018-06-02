@@ -562,6 +562,7 @@
     <Content Include="Scripts\js\login.js" />
     <Content Include="Scripts\js\main.js" />
     <Content Include="Scripts\layui\config\layui.config.js" />
+    <Content Include="Scripts\layui\css\iconfont.css" />
     <Content Include="Scripts\layui\css\layui.css" />
     <Content Include="Scripts\layui\css\layui.mobile.css" />
     <Content Include="Scripts\layui\css\modules\code.css" />
@@ -572,6 +573,7 @@
     <Content Include="Scripts\layui\css\modules\layer\default\loading-0.gif" />
     <Content Include="Scripts\layui\css\modules\layer\default\loading-1.gif" />
     <Content Include="Scripts\layui\css\modules\layer\default\loading-2.gif" />
+    <Content Include="Scripts\layui\css\zyphp.css" />
     <Content Include="Scripts\layui\font\iconfont.svg" />
     <Content Include="Scripts\layui\images\face\0.gif" />
     <Content Include="Scripts\layui\images\face\1.gif" />
@@ -649,6 +651,7 @@
     <Content Include="Scripts\layui\layui.js" />
     <Content Include="Scripts\layui\lay\extend\autocomplete.js" />
     <Content Include="Scripts\layui\lay\extend\common.js" />
+    <Content Include="Scripts\layui\lay\extend\iconpick.js" />
     <Content Include="Scripts\layui\lay\extend\tabrender.js" />
     <Content Include="Scripts\layui\lay\extend\verifyextend.js" />
     <Content Include="Scripts\layui\lay\modules\carousel.js" />
@@ -693,6 +696,7 @@
     <Content Include="Views\Home\EmailSet.cshtml" />
     <Content Include="Views\Demo\CheckList.cshtml" />
     <Content Include="Views\Demo\RadioList.cshtml" />
+    <Content Include="Views\Home\MenuAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

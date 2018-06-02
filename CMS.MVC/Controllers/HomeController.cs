@@ -65,13 +65,18 @@ namespace CMS.MVC.Controllers
             return View();
         }
 
-        public JsonResult GetList(string field,string order)
+        public ActionResult MenuAdd()
+        {
+            return View();
+        }
+
+        public JsonResult GetList(string field, string order)
         {
             //var list = _repository.GetList();
             //var list = _repository.GetListAll();
             //var list = _repository.GetAll(field,order);
             //var str = _repository.GetType("嘿嘿");
-            var list = _repository.GetAllModel(field,order);
+            var list = _repository.GetAllModel(field, order);
 
             var layuiGrid = new LayuiGrid();
             layuiGrid.count = list.Count();
@@ -105,7 +110,7 @@ namespace CMS.MVC.Controllers
 
         public ActionResult ExportExcelData3()
         {
-            var list = _repository.GetAllModel(string.Empty, string.Empty).Select(s=>
+            var list = _repository.GetAllModel(string.Empty, string.Empty).Select(s =>
             {
                 var reportModel = new ReportUserModel();
                 reportModel.Account = s.Account;
@@ -130,7 +135,7 @@ namespace CMS.MVC.Controllers
             //    var model = s.ToModel();
             //    return model;
             //});
-            var list = _repository.GetAllModel("","");
+            var list = _repository.GetAllModel("", "");
             if (list.Count() > 0)
             {
                 dt = DataHelper.ListToDataTable(list.ToList());
@@ -157,7 +162,7 @@ namespace CMS.MVC.Controllers
                         tempList.Add(enty);
                     }
                 }
-               Application.Offices.ExcelHelper.ExcelDownload(tempList, templdateName, newFileName);
+                Application.Offices.ExcelHelper.ExcelDownload(tempList, templdateName, newFileName);
             }
             else
             {

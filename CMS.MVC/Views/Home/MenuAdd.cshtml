@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "菜单添加";
+}
+<link href="~/Scripts/layui/css/zyphp.css" rel="stylesheet" />
+<link href="~/Scripts/layui/css/iconfont.css" rel="stylesheet" />
+<form class="layui-form" action="">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择图标</label>
+        <div class="layui-input-block">
+            <a class="layui-btn layui-btn-primary fl-l mr-5 icon-pick" style="width: 41px;padding: 0 10px;"><i class="iconfont layui-e-caidan" style="font-size:18px;color:#76838f;"></i></a>
+            <input type="text" name="icon" id="icon" autocomplete="off" placeholder="点击左侧选择图标" class="layui-input form-input-40">
+
+            <i class="iconfont layui-e-qq3" style="font-size:18px;color:#76838f;"></i>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片展示</label>
+        <img class="view-thumb" src="">
+    </div>
+
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">图片上传</label>
+        <div class="layui-input-block">
+            <input type="text" value="" style="float: left;margin-right:20px;" placeholder="点击上传图片" class="layui-input form-input-50 page-thumb">
+            <a class="btn btn-primary page-thumb">上传图片</a>
+        </div>
+
+
+    </div>
+    <div class="layui-form-mid layui-word-aux">单图上传,图库管理只能选一张图片，编辑器图片可多选上传多张</div>
+    <div class="layui-form-item layui-form-text">
+        <!-- <label class="layui-form-label">文本域</label> -->
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" name="content" id="content"></textarea>
+        </div>
+    </div>
+</form>
+<script>    
+
+    layui.use('iconpick', function () {
+        var iconpick = layui.iconpick;
+        iconpick.pickinit('icon-pick', 'icon')
+        //iconpick.pickinit 两个参数第一个参数 弹出图标选择器，第二个参数 返回图标值得容器 2个参数用ID class 均可
+        //不用# 或.  淡然。图标可以定制，需要联系
+
+        //图片上传代码
+        //可用页面元素上传 按钮上传， 编辑器上传。如下测试
+    });
+</script>

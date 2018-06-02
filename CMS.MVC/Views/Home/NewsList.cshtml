@@ -68,8 +68,6 @@
 @section Foot{
     <script>
 
-        var rightDataList = [];
-        var leftDataList = [];
         layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
             var form = layui.form,
                 layer = layui.layer,
@@ -77,6 +75,8 @@
                 laydate = layui.laydate,
                 laytpl = layui.laytpl,
                 table = layui.table;
+
+            
             //新闻列表
             //var tableIns = table.render({
             //    elem: '#newsList',
@@ -125,8 +125,11 @@
                     { field: 'Status', title: '状态', align: 'center', },
 
                 ]],
-                //done: function () {
-                //    alert("数据加载完后的响应");
+                //done: function (res, curr, count) {
+                //    console.log(res);
+                //    console.log(curr);
+                //    console.log(count);
+                //    layer.close(myindex);
                 //}
             });
             

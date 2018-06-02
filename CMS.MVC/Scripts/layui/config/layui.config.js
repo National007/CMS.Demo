@@ -4,5 +4,5 @@
     common: 'common',//通用组件
     verifyextend: 'verifyextend',//验证扩展组件
     tabrender: 'tabrender',//tab切换加载
-    autoselect:'autocomplete',//远程select
+    autoselect: 'autocomplete',//远程select
 });
